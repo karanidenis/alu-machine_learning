@@ -5,4 +5,16 @@
 #     return np.transpose(matrix)
 
 def matrix_transpose(matrix):
-    
+    # Calculate the number of rows and columns in the input matrix
+    num_rows = len(matrix)
+    num_cols = len(matrix[0]) if num_rows > 0 else 0
+
+    # Create a new matrix to store the transpose
+    transpose_matrix = [[0] * num_rows for _ in range(num_cols)]
+
+    # Populate the transpose matrix
+    for i in range(num_rows):
+        for j in range(num_cols):
+            transpose_matrix[j][i] = matrix[i][j]
+
+    return transpose_matrix
