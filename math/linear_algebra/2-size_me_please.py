@@ -6,6 +6,7 @@ def matrix_shape(matrix):
     return np.array(matrix).shape
 """
 
+
 def matrix_shape(matrix):
     shape = []
     while isinstance(matrix, list):
