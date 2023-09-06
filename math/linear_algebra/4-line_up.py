@@ -4,6 +4,7 @@
 The module adds two arrays element-wise
 """
 
+
 def add_arrays(arr1, arr2):
     """ function adds two arrays element-wise """
     new_matrix = []
