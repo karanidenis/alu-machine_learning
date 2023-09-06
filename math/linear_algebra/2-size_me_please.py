@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
 """
-This module contains a function for finding the shape of matrices.
+def matrix_shape(matrix):
+    import numpy as np
+    return np.array(matrix).shape
 """
 
 

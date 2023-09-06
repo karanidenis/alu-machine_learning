@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 
-# def matrix_transpose(matrix):
-#     import numpy as np
-#     return np.transpose(matrix)
+"""
+def matrix_transpose(matrix):
+    import numpy as np
+    return np.transpose(matrix)
+"""
 
 def matrix_transpose(matrix):
     """ Calculate the number of rows and columns in the input matrix """
