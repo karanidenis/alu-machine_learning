@@ -5,7 +5,7 @@
 #     return np.transpose(matrix)
 
 def matrix_transpose(matrix):
-    # Calculate the number of rows and columns in the input matrix
+    """ Calculate the number of rows and columns in the input matrix """
     num_rows = len(matrix)
     # print(num_rows)
     num_cols = len(matrix[0]) if num_rows > 0 else 0
