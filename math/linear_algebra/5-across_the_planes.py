@@ -4,11 +4,12 @@
 This module contains the function adds two matrices element-wise
 """
 
+
 def add_matrices2D(mat1, mat2):
     """ function adds two matrices element-wise """
-    
+
     new_matrix = []
-    
+
     # check if matrix has more than list
     if len(mat1) == len(mat2):
         for arr1, arr2 in zip(mat1, mat2):
