@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# import numpy as np
+import numpy as np
 """
 This module contains the function:
 transposes matrix
@@ -9,9 +9,7 @@ transposes matrix
 def np_transpose(matrix):
     """
     assume matrix is translated as numpy.ndarray
+    no conditions
     """
-    if len(matrix) > 0:
-        new_matrix = matrix.transpose
-        return new_matrix
-    else:
-        return []
+    new_matrix = np.transpose(matrix)
+    return new_matrix
