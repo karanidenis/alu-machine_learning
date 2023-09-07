@@ -11,7 +11,7 @@ can be interpreted as numpy.ndarray
 def np_cat(mat1, mat2, axis=0):
     """
     function to concatenate two matrices along an axis
+    no conditions
     """
-
     axis_mat = np.concatenate((mat1, mat2), axis=axis)
     return axis_mat
