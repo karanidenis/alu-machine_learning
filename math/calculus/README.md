@@ -19,4 +19,4 @@ The integral of a function $f(x)$ is defined as the area under the curve of the 
 - [Calculus for Machine Learning](https://www.coursera.org/learn/calculus1)
 
 ## Videos
-- [Calculus 1](https://youtu.be/tt2DGYOi3hc) by [Eddie Woo] on YouTube
+- [Introduction to Calculus](https://youtu.be/tt2DGYOi3hc) by [Eddie Woo] on YouTube
