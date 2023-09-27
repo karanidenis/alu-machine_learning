@@ -35,13 +35,15 @@ class Normal:
         calculates z-score of a given x-value
         x is the value
         """
-        self.x = float((self.x - self.mean) / self.stddev)
-        return self.x
+        # score = float((x - self.mean) / self.stddev)
+        # return score
+        return (x - self.mean) / self.stddev
 
     def x_value(self, z):
         """
         calculates x-value of the given z-score
         z - z-score
         """
-        x_value = (self.z * self.stddev) + self.mean
-        return x_value
+        return (z * self.stddev) + self.mean
+        # x_value = (z * self.stddev) + self.mean
+        # return x_value
