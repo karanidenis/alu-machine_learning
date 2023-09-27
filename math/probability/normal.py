@@ -55,12 +55,12 @@ class Normal:
         calculates the value of the PDF for a given x-value
         x - the x-value
         """
-        import math
         pi = 3.1415926536
         e = 2.7182818285
         exponent = -((x - self.mean) ** 2) / (2 * self.stddev ** 2)
-        pdf = (1 / (self.stddev * math.sqrt(2 * pi))) * e **(exponent)
+        pdf = (1 / (self.stddev * (2 * pi) ** 0.5)) * e ** (exponent)
         return pdf
+
         # import math
         # pi = 3.1415926536
         # e = 2.7182818285
