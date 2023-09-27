@@ -39,8 +39,8 @@ class Poisson:
         factorial = 1
         for i in range(1, k + 1):
             factorial = factorial * i
-        result = self.lambtha ** k * 2.7182818285 ** (-self.lambtha) / factorial
-        return result
+        result = self.lambtha ** k * 2.7182818285 ** (-self.lambtha)
+        return result / factorial
 
     def cdf(self, k):
         """
