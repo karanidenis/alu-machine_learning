@@ -19,18 +19,18 @@ class Normal:
         if data is None:
             if stddev <= 0:
                 raise ValueError("stddev must be a positive value")
-            self.stddev = float(stddev)
             self.mean = float(mean)
+            self.stddev = float(stddev)
         else:
-            if type(data) is not list:
+            if not isinstance(data, list):
                 raise TypeError("data must be a list")
             if len(data) < 2:
                 raise ValueError("data must contain multiple values")
-            else:
-                self.mean = float(sum(data) / len(data))
-                squared_diff = [(x - self.mean) ** 2 for x in data]
-                self.stddev = float(
-                    (sum(squared_diff) / (len(data) - 1)) ** 0.5)
+            
+            self.mean = float(sum(data) / len(data))
+            
+            squared_diff = [(x - self.mean) ** 2 for x in data]
+            self.stddev = (sum(squared_diff) / (len(data) - 1)) ** 0.5
 
     def z_score(self, x):
         """
