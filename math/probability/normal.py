@@ -66,3 +66,22 @@ class Normal:
         # pdf = (1 / (self.stddev * math.sqrt(2 * pi))) * e ** (
         #     -((x - self.mean) ** 2) / (2 * self.stddev ** 2))
         # return pdf
+
+    def cdf(self, x):
+        """
+        calculates the value of the CDF for a given x-value
+        x - the x-value
+        """
+        pi = 3.1415926536
+        e = 2.7182818285
+        exponent = -((x - self.mean) ** 2) / (2 * self.stddev ** 2)
+        erf = (2 / (pi ** 0.5)) * (x - ((x ** 3) / 3) + ((x ** 5) / 10) -
+                                   ((x ** 7) / 42) + ((x ** 9) / 216))
+        cdf = 0.5 * (1 + erf * (e ** exponent))
+        return cdf
+
+        # pi = 3.1415926536
+        # e = 2.7182818285
+        # cdf = (1 / 2) * (1 + math.erf((x - self.mean) / (self.stddev * 2 ** 0.5)))
+        # return cdf
+        
