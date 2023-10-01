@@ -77,8 +77,9 @@ class Normal:
         #                            ((x ** 7) / 42) + ((x ** 9) / 216))
         # print(erf)
         # cdf = 0.5 * (1 + erf * (e ** exponent))
-        return (0.5 * (1 + self.erf((x - self.mean) /
-                                    (self.stddev * 2 ** 0.5))))
+        erf = (x - self.mean) / (self.stddev * (2 ** 0.5))
+        cdf = 0.5 * (1 + (self.erf(erf)))
+        return cdf
 
     def erf(self, x):
         """ Calculates the error function
