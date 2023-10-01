@@ -79,8 +79,3 @@ class Normal:
         # cdf = 0.5 * (1 + erf * (e ** exponent))
         return (0.5 * (1 + self.erf((x - self.mean) /
                                     (self.stddev * 2 ** 0.5))))
-
-        # pi = 3.1415926536
-        # e = 2.7182818285
-        # cdf = (1 / 2) * (1 + math.erf((x - self.mean) / (self.stddev * 2 ** 0.5)))
-        # return cdf
