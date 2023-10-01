@@ -18,14 +18,14 @@ class Normal:
         """
         self.E = 2.7182818285
         self.PI = 3.1415926536
-        
+
         if data is None:
             if stddev <= 0:
                 raise ValueError("stddev must be a positive value")
             else:
                 self.stddev = float(stddev)
             self.mean = float(mean)
-            
+
         else:
             if not isinstance(data, list):
                 raise TypeError("data must be a list")
