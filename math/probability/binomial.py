@@ -58,7 +58,7 @@ class Binomial:
         return pmf
 
     def cdf(self, k):
-        '''calculate CDF function'''
+        '''calculate CDF for a given number of "successes" k'''
         if k < 0:
             return 0
         k = int(k)
