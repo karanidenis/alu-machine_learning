@@ -43,9 +43,8 @@ class Binomial:
 
     def pmf(self, k):
         """
-        Calculates the value of the PMF for a given number of "successes" 
-        k without using external libraries.
-        k - The number of "successes" for which you want to calculate the PMF.
+        Calculates the PMF for a given number of "successes" k
+        k - The number of "successes"
         Returns the PMF value for k.
         """
         if k < 0:
@@ -57,3 +56,11 @@ class Binomial:
         pk = self.p ** k
         pmf = (n_f / (k_f * (nk_f))) * pk * ((1 - self.p) ** (self.n - k))
         return pmf
+
+    def cdf(self, k):
+        '''calculate CDF function'''
+        if k < 0:
+            return 0
+        k = int(k)
+        cdf = sum(self.pmf(i) for i in range(k + 1))
+        return cdf
