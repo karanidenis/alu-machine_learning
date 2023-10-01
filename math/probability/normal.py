@@ -36,7 +36,8 @@ class Normal:
             self.mean = float(sum(data) / len(data))
 
             squared_diff = [(x - self.mean) ** 2 for x in data]
-            self.stddev = (sum(squared_diff) / len(data)) ** 0.5  # Use the population standard deviation formula
+            # Use the population standard deviation formula
+            self.stddev = (sum(squared_diff) / len(data)) ** 0.5
 
     def z_score(self, x):
         """
@@ -69,9 +70,9 @@ class Normal:
         # exp = -0.5 * (((x - self.mean) / self.stddev) ** 2)
         # return float(factor * (self.E ** exp))
         exponent = -((x - self.mean) ** 2) / (2 * (self.stddev ** 2))
-        pdf_value = (1 / (self.stddev * ((2 * self.PI) ** 0.5))) * (self.E ** exponent)
+        pdf_value = (1 / (self.stddev * ((2 * self.PI) ** 0.5))) * \
+            (self.E ** exponent)
         return pdf_value
-
 
     def cdf(self, x):
         """
