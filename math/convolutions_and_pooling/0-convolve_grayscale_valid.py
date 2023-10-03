@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-import numpy as np
 
 """
 This module has the method that performs a valid
 convolution on grayscale images
 """
+import numpy as np
 
 
 def convolve_grayscale_valid(images, kernel):
