@@ -21,22 +21,20 @@ def convolve_grayscale_valid(images, kernel):
     """
     m, h, w = images.shape
     kh, kw = kernel.shape
-    m, h, w = images.shape
-    kh, kw = kernel.shape
-    # Calculate the padding required to maintain the same output size
-    padding_h = kh // 2
-    padding_w = kw // 2
-    padded_images = np.pad(
-        images, ((0, 0), (padding_h, padding_h), (padding_w, padding_w)),
-        mode='constant')
+     # Calculate the output size for "valid" convolution
+    out_h = h - kh + 1
+    out_w = w - kw + 1
 
-    # Perform convolution
-    convolved_images = np.zeros((m, h, w))
+    # Initialize the output array
+    convolved_images = np.zeros((m, out_h, out_w))
+
+    # Perform "valid" convolution with two for loops
     for i in range(m):
-        for j in range(h):
-            for k in range(w):
-                patch = padded_images[i, j:j + kh, k:k + kw]
+        for j in range(out_h):
+            for k in range(out_w):
+                # Extract a patch from the image
+                patch = images[i, j:j + kh, k:k + kw]
+                # Perform element-wise multiplication and sum
                 convolved_images[i, j, k] = np.sum(patch * kernel)
-                print(convolved_images)
 
     return convolved_images
