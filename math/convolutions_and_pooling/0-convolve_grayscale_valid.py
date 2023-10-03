@@ -37,5 +37,6 @@ def convolve_grayscale_valid(images, kernel):
             for k in range(w):
                 patch = padded_images[i, j:j + kh, k:k + kw]
                 convolved_images[i, j, k] = np.sum(patch * kernel)
+                print(convolved_images)
 
     return convolved_images
