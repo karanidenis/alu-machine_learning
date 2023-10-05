@@ -12,7 +12,7 @@ def convolve_channels(images, kernel, padding='same', stride=(1, 1)):
     convolution with channels
     """
     m, h, w, c = images.shape
-    kh, kw, kc = kernel.shape
+    kh, kw, _ = kernel.shape
     # stride
     sh, sw = stride
 
@@ -21,7 +21,7 @@ def convolve_channels(images, kernel, padding='same', stride=(1, 1)):
         pw = int(((w - 1) * sw + kw - w) / 2)
     elif isinstance(padding, tuple):
         ph, pw = padding
-    else:
+    elif padding == 'valid':
         ph, pw = 0, 0
 
     # output
