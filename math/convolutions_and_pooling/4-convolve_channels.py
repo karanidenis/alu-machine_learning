@@ -8,6 +8,9 @@ import numpy as np
 
 
 def convolve_channels(images, kernel, padding='same', stride=(1, 1)):
+    """
+    convolution with channels
+    """
     m, h, w, c = images.shape
     kh, kw, kc = kernel.shape
     # stride
