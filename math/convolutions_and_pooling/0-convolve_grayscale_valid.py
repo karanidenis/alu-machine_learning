@@ -19,28 +19,9 @@ def convolve_grayscale_valid(images, kernel):
     kw - width of kernel
     Returns: numpy.ndarray containing the convolved images
     """
-    # m, h, w = images.shape
-    # kh, kw = kernel.shape
-    # # Calculate the output size for "valid" convolution
-    # out_h = h - kh + 1
-    # out_w = w - kw + 1
-
-    # # Initialize the output array
-    # convolved_images = np.zeros((m, out_h, out_w))
-
-    # # Perform "valid" convolution with two for loops
-    # for i in range(m):
-    #     for j in range(out_h):
-    #         for k in range(out_w):
-    #             # Extract a patch from the image
-    #             patch = images[i, j:j + kh, k:k + kw]
-    #             # Perform element-wise multiplication and sum
-    #             convolved_images[i, j, k] = np.sum(patch * kernel)
-    #             print(convolved_images)
-
-    # return convolved_images
     m, h, w = images.shape
     kh, kw = kernel.shape
+
     # Calculate the output size for "valid" convolution
     out_h = h - kh + 1
     out_w = w - kw + 1
@@ -56,5 +37,5 @@ def convolve_grayscale_valid(images, kernel):
             # Perform element-wise multiplication and sum
             convolved_images[:, i, j] = np.sum(patch * kernel, axis=(1, 2))
             print(convolved_images)
-    
+
     return convolved_images
