@@ -8,9 +8,6 @@ import numpy as np
 
 
 def convolve_channels(images, kernel, padding='same', stride=(1, 1)):
-    """
-    convolution with channels
-    """
     m, h, w, c = images.shape
     kh, kw, kc = kernel.shape
     # stride
@@ -31,13 +28,15 @@ def convolve_channels(images, kernel, padding='same', stride=(1, 1)):
     # initialise convolved images
     convolved_images = np.zeros((m, out_h, out_w))
 
+    # Perform the convolution
     for i in range(out_h):
         for j in range(out_w):
             for k in range(m):
-                # Extract a patch from the image
-                patch = images[k, i * sh:i * sh + kh, j * sw:j * sw + kw, :]
                 for ch in range(c):
+                    # Extract a patch from the image
+                    patch = images[k, i * sh:i *
+                                   sh + kh, j * sw:j * sw + kw, :]
                     convolved_images[k, i,
-                                     j] += np.sum(patch[:, :, ch] * kernel[:, :, ch])
+                                     j] += np.sum(patch * kernel[:, :, ch])
 
     return convolved_images
