@@ -12,7 +12,7 @@ def convolve_channels(images, kernel, padding='same', stride=(1, 1)):
     convolution with channels
     """
     m, h, w, c = images.shape
-    kh, kw, _ = kernel.shape
+    kh, kw, kc = kernel.shape
     # stride
     sh, sw = stride
 
@@ -33,14 +33,14 @@ def convolve_channels(images, kernel, padding='same', stride=(1, 1)):
         images, ((0, 0), (ph, ph), (pw, pw), (0, 0)), mode='constant')
 
     # initialise convolved images
-    convolved_images = np.zeros((m, out_h, out_w, 1))
+    convolved_images = np.zeros((m, out_h, out_w))
 
     # Perform the convolution
     for i in range(out_h):
         for j in range(out_w):
             # Extract a patch from the image
             patch = images_padded[:, i * sh:i * sh + kh, j * sw:j * sw + kw, :]
-            convolved_images[:, i, j, 0] = np.tensordot(
+            convolved_images[:, i, j] = np.tensordot(
                 patch, kernel, axes=([1, 2, 3], [0, 1, 2]))
 
     return convolved_images
