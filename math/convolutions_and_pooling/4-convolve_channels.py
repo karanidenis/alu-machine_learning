@@ -39,7 +39,7 @@ def convolve_channels(images, kernel, padding='same', stride=(1, 1)):
     # for i in range(out_h):
     #     for j in range(out_w):
     #         # Extract a patch from the image
-    #         patch = images_padded[:, i * sh:i * sh + kh, j * sw:j * sw + kw, :]
+    #       patch = images_padded[:, i * sh:i * sh + kh, j * sw:j * sw + kw, :]
     #         convolved_images[:, i, j] = np.tensordot(
     #             patch, kernel, axes=([1, 2, 3], [0, 1, 2]))
 
