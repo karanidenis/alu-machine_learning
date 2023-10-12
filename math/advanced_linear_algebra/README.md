@@ -165,6 +165,21 @@ The determinant of `A` is
 ```code
 det(A) = aei + bfg + cdh - ceg - bdi - afh
 ```
+```text
+If 'A' is a higher than 3x3 matrix, then
+```
+```text
+The determinant of `A` is
+```
+```code
+det(A) = a_11 * A_11 + a_12 * A_12 + ... + a_1n * A_1n
+```
+```text
+where `a_11`, `a_12`, ..., `a_1n` are the elements of the first row of `A` and `A_11`, `A_12`, ..., `A_1n` are the cofactors of `a_11`, `a_12`, ..., `a_1n`.
+```
+```text
+The determinant of `A` is the sum of the products of the elements of the first row of `A` and their cofactors.
+```
 ##### 4.2. Properties
 ###### 4.2.1. Property
 ```text
