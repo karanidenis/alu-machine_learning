@@ -4,8 +4,6 @@
 this module has the function minor(matrix)
 """
 
-determinant = __import__('0-determinant').determinant
-
 
 def minor(matrix):
     """
