@@ -17,7 +17,7 @@ def inverse(matrix):
             raise ValueError('matrix must be a non-empty square matrix')
 
     if len(matrix) == 1:
-        return [[1]]
+        return [1/matrix[0][0]]
     if len(matrix) == 2:
         det = determinant(matrix)
         if det == 0:
