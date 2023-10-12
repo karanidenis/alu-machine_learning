@@ -29,6 +29,5 @@ def adjugate(matrix):
         g = (matrix[0][1]*matrix[1][2]) - (matrix[0][2]*matrix[1][1])
         h = (matrix[0][0]*matrix[1][2]) - (matrix[0][2]*matrix[1][0])
         i = (matrix[0][0]*matrix[1][1]) - (matrix[0][1]*matrix[1][0])
-    # result = [[a, -b, c], [-d, e, -f], [g, -h, i]]
     adjugated_matrix = [[a, -d, g], [-b, e, -h], [c, -f, i]]
     return adjugated_matrix
