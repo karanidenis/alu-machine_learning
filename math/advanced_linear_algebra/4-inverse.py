@@ -3,6 +3,7 @@
 """
 this module has the function inverse(matrix)
 """
+determinant = __import__('0-determinant').determinant
 
 
 def inverse(matrix):
@@ -18,7 +19,16 @@ def inverse(matrix):
     if len(matrix) == 1:
         return [[1]]
     if len(matrix) == 2:
-        return [[matrix[1][1], -matrix[1][0]], [matrix[0][1], -matrix[0][0]]]
+        det = determinant(matrix)
+        if det == 0:
+            return None
+        a = matrix[1][1] / det
+        b = -matrix[0][1] / det
+        c = -matrix[1][0] / det
+        d = matrix[0][0] / det
+        return [[a, b], [c, d]]
+    if determinant(matrix) == 0:
+        return None
     if len(matrix) == 3:
         a = (matrix[1][1]*matrix[2][2]) - (matrix[1][2]*matrix[2][1])
         b = (matrix[1][0]*matrix[2][2]) - (matrix[1][2]*matrix[2][0])
@@ -31,4 +41,8 @@ def inverse(matrix):
         i = (matrix[0][0]*matrix[1][1]) - (matrix[0][1]*matrix[1][0])
     # result = [[a, -b, c], [-d, e, -f], [g, -h, i]]
     adjugated_matrix = [[a, -d, g], [-b, e, -h], [c, -f, i]]
-    return adjugated_matrix
+
+    mat_inverse = mat_inverse = [
+        [entry / determinant(matrix) for entry in row]
+        for row in adjugated_matrix]
+    return mat_inverse
