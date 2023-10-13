@@ -11,8 +11,10 @@ def determinant(matrix):
     """
     if matrix == [[]]:
         return 1
-    if len(matrix) < 1:
-        # and not isinstance(matrix[0], list):
+    # if len(matrix) < 1:
+    #     # and not isinstance(matrix[0], list):
+    #     raise TypeError('matrix must be a list of lists')
+    if not isinstance(matrix, list) or not all(isinstance(row, list) for row in matrix):
         raise TypeError('matrix must be a list of lists')
     # for row in matrix:
     #     if len(row) != len(matrix):
