@@ -6,6 +6,7 @@ this module has the function minor(matrix)
 
 determinant = __import__('0-determinant').determinant
 
+
 def minor(matrix):
     """
     calculate the minor of a matrix
@@ -13,7 +14,8 @@ def minor(matrix):
 
     # if len(matrix) < 1:
     #     raise TypeError('matrix must be a list of lists')
-    if not isinstance(matrix, list) or not all(isinstance(row, list) for row in matrix):
+    if not isinstance(matrix, list) or not all(isinstance(row, list)
+                                               for row in matrix):
         raise TypeError('matrix must be a list of lists')
 
     for row in matrix:
@@ -39,12 +41,12 @@ def minor(matrix):
 
     else:
         minor_mat = []
-        
         for i in range(len(matrix)):
             minor_row = []
             for j in range(len(matrix)):
-                submatrix = [row[:j] + row[j + 1:] for row in (matrix[:i] + matrix[i + 1:])]
+                submatrix = [row[:j] + row[j + 1:]
+                             for row in (matrix[:i] + matrix[i + 1:])]
                 minor_row.append(determinant(submatrix))
             minor_mat.append(minor_row)
-        
+
         return minor_mat
