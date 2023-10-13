@@ -20,7 +20,6 @@ def determinant(matrix):
     if not all(len(row) == len(matrix) for row in matrix):
         raise ValueError('matrix must be a square matrix')
 
-
     if len(matrix) == 1:
         return matrix[0][0]
     elif len(matrix) == 2:
@@ -41,11 +40,16 @@ def determinant(matrix):
         det = 0
         for i in range(len(matrix)):
             cofactor = matrix[0][i] * determinant(get_minor(matrix, 0, i))
-            if i % 2 == 0:  # Use the sign of the permutation to determine the sign of the cofactor
+            if i % 2 == 0:
                 det += cofactor
             else:
                 det -= cofactor
         return det
 
+
 def get_minor(matrix, row, col):
-    return [[matrix[i][j] for j in range(len(matrix)) if j != col] for i in range(len(matrix)) if i != row]
+    """
+    calculating minor of a matrix
+    """
+    return [[matrix[i][j] for j in range(len(matrix))
+             if j != col] for i in range(len(matrix)) if i != row]
