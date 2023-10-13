@@ -4,6 +4,8 @@
 this module has the function adjugate(matrix)
 """
 
+cofactor = __import__('2-cofactor').cofactor
+
 
 def adjugate(matrix):
     """
@@ -17,9 +19,9 @@ def adjugate(matrix):
 
     if len(matrix) == 1:
         return [[1]]
-    if len(matrix) == 2:
+    elif len(matrix) == 2:
         return [[matrix[1][1], -matrix[0][1]], [-matrix[1][0], matrix[0][0]]]
-    if len(matrix) == 3:
+    elif len(matrix) == 3:
         a = (matrix[1][1]*matrix[2][2]) - (matrix[1][2]*matrix[2][1])
         b = (matrix[1][0]*matrix[2][2]) - (matrix[1][2]*matrix[2][0])
         c = (matrix[1][0]*matrix[2][1]) - (matrix[1][1]*matrix[2][0])
@@ -29,5 +31,11 @@ def adjugate(matrix):
         g = (matrix[0][1]*matrix[1][2]) - (matrix[0][2]*matrix[1][1])
         h = (matrix[0][0]*matrix[1][2]) - (matrix[0][2]*matrix[1][0])
         i = (matrix[0][0]*matrix[1][1]) - (matrix[0][1]*matrix[1][0])
-    adjugated_matrix = [[a, -d, g], [-b, e, -h], [c, -f, i]]
-    return adjugated_matrix
+        adjugated_matrix = [[a, -d, g], [-b, e, -h], [c, -f, i]]
+        return adjugated_matrix
+    else:
+        num_rows = len(matrix)
+        cofactor_mat = cofactor(matrix)  # Calculate the cofactor matrix
+        adjugate_mat = [[cofactor_mat[j][i]
+                         for j in range(num_rows)] for i in range(num_rows)]
+        return adjugate_mat
