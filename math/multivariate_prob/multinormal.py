@@ -43,7 +43,8 @@ class MultiNormal:
 
         if x.shape != (self.mean.shape[0], 1):
             raise ValueError(
-                'x must have the shape ({}, 1)'.format(self.mean.shape[0]))
+                'x must have the shape ({}, 1)'.
+                format(self.mean.shape[0]))
 
         # calculate PDF
         # print(self.cov.shape)
@@ -55,7 +56,7 @@ class MultiNormal:
         prefactor = 1.0 / (np.sqrt((2 * np.pi) ** d * det))
         exponent = -0.5 * np.dot(np.dot(x_m.T, cov_inv), x_m)
         pdf = prefactor * np.exp(exponent)
-        
+
         # first = 1 / np.sqrt(((2 * np.pi) ** d) * det)
         # second = np.exp(-(np.matmul(np.matmul(x_m.T, cov_inv), x_m)) / 2)
         # pdf = first * second
