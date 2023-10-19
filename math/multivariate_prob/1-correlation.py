@@ -22,8 +22,18 @@ def correlation(C):
     if np.ndim(C) != 2 and d != d:
         raise ValueError("C must be a 2D square matrix")
 
+    # initialise correlation matrix
     cor = np.zeros((d, d))
+    print(cor)
+    print(cor.shape)
+    # diagonal elements are 1
+    np.fill_diagonal(cor, 1)
+    print(cor)
+    print(cor.shape)
+    # iterate over rows
     for i in range(d):
+        # iterate over columns
         for j in range(d):
+            # calculate correlation
             cor[i, j] = C[i, j] / np.sqrt(C[i, i] * C[j, j])
     return cor
