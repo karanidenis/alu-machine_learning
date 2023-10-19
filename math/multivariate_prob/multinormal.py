@@ -60,4 +60,5 @@ class MultiNormal:
         # first = 1 / np.sqrt(((2 * np.pi) ** d) * det)
         # second = np.exp(-(np.matmul(np.matmul(x_m.T, cov_inv), x_m)) / 2)
         # pdf = first * second
+        print(pdf)
         return pdf[0][0]
