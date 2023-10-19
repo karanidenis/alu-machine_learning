@@ -13,7 +13,7 @@ def correlation(C):
     C - numpy.ndarray - covariance matrix, shape (d, d)
     d - int - number of dimensions
     """
-
+    C = np.array(C)
     d, d = C.shape
     if type(C) is not np.ndarray:
         raise TypeError("C must be a numpy.ndarray")
