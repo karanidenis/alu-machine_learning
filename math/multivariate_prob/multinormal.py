@@ -43,7 +43,7 @@ class MultiNormal:
 
         if x.shape != (self.mean.shape[0], 1):
             raise ValueError(
-                'x must have the shape ({d}, 1)')
+                'x must have the shape ({}, 1)'.format(self.mean.shape[0]))
 
         # calculate PDF
         # print(self.cov.shape)
