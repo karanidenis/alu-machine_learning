@@ -16,8 +16,8 @@ def mean_cov(x):
     n - int - number of data points
     d - int - number of dimensions
     """
-    n, d = x.shape
-    if type(x) is not np.ndarray and len(x.shape) != 2:
+    (n, d) = x.shape
+    if type(x) is not np.ndarray and np.ndim(x) != 2:
         raise TypeError("X must be a 2D numpy.ndarray")
 
     if n < 2:
