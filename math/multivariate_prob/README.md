@@ -2,6 +2,7 @@
 #### Mean
 ```python
 def mean(x):
+    # x is a vector
     return sum(x) / len(x)
 ```
 #### Variance
@@ -25,6 +26,17 @@ def correlation(x, y):
         return covariance(x, y) / stdev_x / stdev_y
     else:
         return 0
+```
+```python
+def correlatio(x)
+    # x is a covariance matrix
+    # loop through the rows and columns
+    # and calculate the correlation
+    # return a correlation matrix
+    for i in range(len(x)):
+        for j in range(len(x)):
+            x[i][j] = x[i][j] / sqrt(x[i][i] * x[j][j])
+    return x
 ```
 #### Covariance Matrix
 ```python
