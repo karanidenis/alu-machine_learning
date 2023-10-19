@@ -17,7 +17,7 @@ def mean_cov(x):
     d - int - number of dimensions
     """
     if not isinstance(x, np.ndarray) and np.ndim(x) != 2:
-        raise TypeError("X must be a numpy.ndarray")
+        raise TypeError("X must be a 2D numpy.ndarray")
 
     x = np.array(x)
     if x.shape[0] < 2:
