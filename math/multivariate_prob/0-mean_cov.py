@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-This module contains a function that 
+This module contains a function that
 calculates the mean and covariance of a
 data set.
 """
@@ -17,7 +17,7 @@ def mean_cov(x):
     d - int - number of dimensions
     """
     x = np.array(x)
-    n, d = x.shape
+    (n, d) = x.shape
     if np.ndim(x) != 2:
         raise TypeError("X must be a 2D numpy.ndarray")
 
