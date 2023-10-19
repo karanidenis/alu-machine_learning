@@ -53,12 +53,15 @@ class MultiNormal:
         cov_inv = np.linalg.inv(self.cov)
         det = np.linalg.det(self.cov)
         # divide the formulae to two
-        prefactor = 1.0 / (np.sqrt((2 * np.pi) ** d * det))
-        exponent = -0.5 * np.dot(np.dot(x_m.T, cov_inv), x_m)
+        # print(np.pi)
+        pi = 3.1415926536
+        prefactor = 1.0 / (np.sqrt((2 * pi) ** d * det))
+        # exponent = -0.5 * np.dot(np.dot(x_m.T, cov_inv), x_m)
+        exponent = -0.5 * np.matmul(np.matmul(x_m.T, cov_inv), x_m)
         pdf = prefactor * np.exp(exponent)
 
         # first = 1 / np.sqrt(((2 * np.pi) ** d) * det)
         # second = np.exp(-(np.matmul(np.matmul(x_m.T, cov_inv), x_m)) / 2)
         # pdf = first * second
-        print(pdf)
+        # print(pdf)
         return pdf[0][0]
