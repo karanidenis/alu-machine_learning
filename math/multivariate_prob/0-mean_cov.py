@@ -16,13 +16,9 @@ def mean_cov(x):
     n - int - number of data points
     d - int - number of dimensions
     """
-    # x = np.array(x)
-    # (n, d) = x.shape
     if not isinstance(x, np.ndarray):
         raise TypeError("X must be a numpy.ndarray")
 
-    # if n < 2:
-    # if len(x.shape) != 2:
     if len(x.shape) < 2:
         raise ValueError("X must contain multiple data points")
 

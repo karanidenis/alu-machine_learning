@@ -37,8 +37,8 @@ def correlation(C):
 
     # initialise correlation matrix
     std_dev = np.sqrt(np.diag(C))
-    print(std_dev)
-    print(std_dev.shape)
+    # print(std_dev)
+    # print(std_dev.shape)
 
     #  calculate correlation matrix
     cor = C / np.outer(std_dev, std_dev)
