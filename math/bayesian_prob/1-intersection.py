@@ -64,5 +64,4 @@ def intersection(x, n, P, Pr):
     # P(H) = Pr
     # intersection = P(E and H) = P(E|H) * P(H)
     intersection = likelihoods * Pr
-
     return intersection
