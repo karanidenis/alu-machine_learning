@@ -8,7 +8,6 @@ obtaining the data
 
 import numpy as np
 likelihood = __import__('0-likelihood').likelihood
-intersection = __import__('1-intersection').intersection
 
 
 def marginal(x, n, P, Pr):
