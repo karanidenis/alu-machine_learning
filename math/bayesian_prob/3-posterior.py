@@ -56,12 +56,13 @@ def posterior(x, n, P, Pr):
         raise ValueError("Pr must sum to 1")
 
     #  formula for posterior probability:
-    #  P(H|E) = P(E|H) * P(H) / P(E)
-    #  P(E|H) = likelihood
-    #  P(H) = Pr
-    #  P(E) = marginal probability
-    #  P(E) = sum(likelihood * Pr)
-    #  P(H|E) = posterior probability
+    # P(X/N) = P(N/X) * P(X) / P(N)
+    #  P(N/X) = likelihood
+    #  P(X) = Pr
+    #  P(N) = marginal probability
+    #  P(N) = sum(likelihood * Pr)
+    #  P(X/N) = posterior probability
+    #  P(X/N) = likelihood * Pr / sum(likelihood * Pr)
     marginal_value = marginal(x, n, P, Pr)
     likelihood_value = likelihood(x, n, P)
     posterior = likelihood_value * Pr / marginal_value
