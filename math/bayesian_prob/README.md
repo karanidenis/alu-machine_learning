@@ -1,9 +1,11 @@
 ### Bayesian Probability
+
 <p>Bayesian probability is an interpretation of the concept of probability, in which, instead of frequency or propensity of some phenomenon, probability is interpreted as reasonable expectation representing a state of knowledge or as quantification of a personal belief.</p>
 
 <p>Bayesian probability belongs to the category of evidential probabilities; to evaluate the probability of a hypothesis, the Bayesian probabilist specifies some <em>prior probability</em>, which is then <em>updated</em> to a <em>posterior probability</em> in the light of new, relevant data (evidence). The Bayesian interpretation provides a standard set of procedures and formulae to perform this calculation.</p>
 
- #### Likelihood 
+#### Likelihood
+
 <p>The likelihood function (often simply called the likelihood) is a function of the parameters of a statistical model. Likelihood functions play a key role in statistical inference, especially methods of estimating a parameter from a set of statistics. In informal contexts, "likelihood" is often used as a synonym for "probability."</p>
 
 <p>Given some data, the likelihood of some hypothesis is proportional to the probability of observing that data given that hypothesis. It is a function of the parameters of the hypothesis, but viewed as a function of the observed data, with the parameters held fixed.</p>
@@ -26,7 +28,8 @@ def likelihood(data, hypo):
     return likelihood
 ```
 
- #### Posterior distribution
+#### Posterior distribution
+
 <p>In Bayesian statistics, a <em>posterior probability distribution</em>, often simply called the <em>posterior</em>, of an uncertain quantity is the conditional probability distribution of the quantity given the observed data. For example, suppose the quantity is the parameter of a parametric family of probability distributions. The <em>data</em> may be a set of observations of instances of the phenomenon being studied, or the data may be a summary of existing data in the form of a set of sufficient statistics.</p>
 
 ```python
@@ -55,13 +58,16 @@ def main():
                      ylabel='Probability')
     thinkplot.Show()
 ```
+
 formula:
 
+```text
 P(H|D) = P(D|H) * P(H) / P(D)
+```
 
+```text
 P(H|D) = posterior probability of H given D
 P(D|H) = likelihood of D given H
 P(H) = prior probability of H
 P(D) = prior probability of D - marginal likelihood/normalizing constant
-
-
+```
