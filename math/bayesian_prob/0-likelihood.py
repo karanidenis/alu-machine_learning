@@ -27,10 +27,10 @@ def likelihood(x, n, p):
         raise ValueError("x cannot be greater than n")
 
     if not isinstance(p, np.ndarray) or len(p.shape) != 1:
-        raise TypeError("p must be a 1D numpy.ndarray")
+        raise TypeError("P must be a 1D numpy.ndarray")
 
     if np.any(p > 1) or np.any(p < 0):
-        raise ValueError("All values in p must be in the range [0, 1]")
+        raise ValueError("All values in P must be in the range [0, 1]")
 
     fact_n = 1
     for i in range(1, n + 1):
