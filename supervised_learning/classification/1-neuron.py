@@ -29,7 +29,7 @@ class Neuron:
             """setter function"""
             self.__W = value
             
-        # Initialize the bias for the neuron
+        # Initialize the bias the neuron
         self.__b = 0
         @property
         def b(self):
