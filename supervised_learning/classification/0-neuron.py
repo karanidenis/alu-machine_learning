@@ -21,7 +21,7 @@ class Neuron:
         # Generate a random number from a normal distribution
         self.W = np.random.normal(0, 1, (nx, 1))
 
-        # b - bias for the neuron
+        # b - bias of the neuron
         self.b = 0
 
         # A - activated output of the neuron(Prediction)
