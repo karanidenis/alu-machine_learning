@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""This module is of a single perfoming classification"""
 import numpy as np
 
 
