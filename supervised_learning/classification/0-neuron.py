@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 import numpy as np
 
+
 class Neuron:
     """class that defines a single neuron performing classification"""
-    
+
     def __init__(self, nx):
         """class constructor
         """
@@ -20,9 +21,9 @@ class Neuron:
 
         # Generate a random number from a normal distribution
         self.W = np.random.normal(0, 1, (nx, 1))
-        
+
         # b - bias for the neuron
         self.b = 0
-        
+
         # A - activated output of the neuron(Prediction)
         self.A = 0
