@@ -7,7 +7,6 @@ class Neuron:
 
     def __init__(self, nx):
         """class constructor
-        # w - weights vector for the neuron
         """
         # nx - no. of input features to the neuron
         if not isinstance(nx, int):
