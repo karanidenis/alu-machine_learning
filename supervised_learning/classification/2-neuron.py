@@ -57,3 +57,16 @@ class Neuron:
     # def A(self, value):
     #     """setter function"""
     #     self.__A = value
+
+    def forward_prop(self, X):
+        """calculating forward propagation of the neuron"""
+        # X - a np.ndarray of shape (nx, m)
+        # nx - input features to the neuron
+        # m - no. of examples
+        
+        # weighted sum
+        weighted_sum = np.dot(self.__W.T, X) + self.__b
+        # applying activation function
+        self.__A = 1/(1 + np.exp(-weighted_sum))
+
+        return self.__A
