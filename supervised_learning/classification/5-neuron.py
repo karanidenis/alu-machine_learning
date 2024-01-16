@@ -99,13 +99,13 @@ class Neuron:
         A - contains activated output of the neuron
         alpha - learning rate
         """
-        #  w = w - alpha*dw 
-        # w = w - alpha*d(w, b)/dw 
+        #  w = w - alpha*dw
+        # w = w - alpha*d(w, b)/dw
         # b = b - alpha * d(w, b) / db
-        m = X.shape[1] # examples
+        m = X.shape[1]  # examples
         dw = np.dot(X, (A - Y).T) / m
         db = np.sum(A - Y) / m
-        
+
         # updating weights and bias
         self.__W = self.__A - alpha*dw
         self.__b = self.__b - alpha*db
