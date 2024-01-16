@@ -85,7 +85,7 @@ class Neuron:
         X - np.ndarray of shape (nx, m) contains input data
         Y - np.ndarray of shape (1, m) contains correct labels for input data
         """
-        
+
         A = self.forward_prop(X)
         cost = self.cost(Y, A)
         predictions = (A >= 0.5).astype(int)
