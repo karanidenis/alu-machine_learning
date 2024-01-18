@@ -84,9 +84,6 @@ class NeuralNetwork:
         """evaluating the network's predictions"""
         # A = self.forward_prop(X)
         _, A2 = self.forward_prop(X)
-        print("Shape of X:", X.shape)  # Should be (nx, m)
-        print("Shape of Y:", Y.shape)  # Should be (1, m)
-        print("Shape of A2:", A2.shape) 
         cost = self.cost(Y, A2)
         predictions = (A2 >= 0.5).astype(int)
 
