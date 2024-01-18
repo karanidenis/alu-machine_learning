@@ -66,6 +66,6 @@ class NeuralNetwork:
 
         weighted_sum_2 = np.dot(self.__W2, self.__A1).T + self.__b2
 
-        self.__A2 = 1/(1 + np.exp(-weighted_sum_2))
+        self.__A2 = 1/(1 + np.exp(-weighted_sum_2)).reshape(1, -1)
 
         return self.__A1, self.__A2
