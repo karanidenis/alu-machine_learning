@@ -58,6 +58,7 @@ class NeuralNetwork:
         """calculate forward propagation of neural network
         X - (nx, m)
         m- no. of examples"""
+        m = X.shape[1]
 
         # A = weighted sum + bias
         weighted_sum_1 = np.dot(self.__W1, X) + self.__b1
@@ -66,6 +67,15 @@ class NeuralNetwork:
 
         weighted_sum_2 = np.dot(self.__W2, self.__A1).T + self.__b2
 
-        self.__A2 = 1/(1 + np.exp(-weighted_sum_2))
+        self.__A2 = 1/(1 + np.exp(-weighted_sum_2)).reshape(1, -1)
 
         return self.__A1, self.__A2
+
+    def cost(self, Y, A):
+        """calculates cost of model using logistic regression
+        Y - correct labels of input data
+        A - activated output"""
+        m = Y.shape[1]
+        cost = -(1/m) * np.sum(Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A))
+        
+        return cost
