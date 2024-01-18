@@ -26,7 +26,7 @@ class NeuralNetwork:
         self.__W1 = np.random.randn(nodes, nx)
         self.__b1 = np.zeros((nodes, 1))
         self.__W2 = np.random.randn(1, nodes)
-        self.__b2 = np.zeros((1, nodes))
+        self.__b2 = np.zeros((1, 1))
         self.__A2 = 0
         self.__A1 = 0
 
@@ -64,7 +64,7 @@ class NeuralNetwork:
 
         self.__A1 = 1 / (1 + np.exp(-weighted_sum_1))
 
-        weighted_sum_2 = np.dot(self.__W2, self.__A1).T + self.__b2
+        weighted_sum_2 = np.dot(self.__W2, self.__A1) + self.__b2
 
         self.__A2 = 1/(1 + np.exp(-weighted_sum_2)).reshape(1, -1)
 
