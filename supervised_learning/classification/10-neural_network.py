@@ -59,14 +59,14 @@ class NeuralNetwork:
         X - (nx, m)
         m- no. of examples"""
         m = X.shape[1]
-        
+
         # A = weighted sum + bias
         weighted_sum_1 = np.dot(self.__W1, X) + self.__b1
-        
+
         self.__A1 = 1 / (1 + np.exp(-weighted_sum_1))
-        
+
         weighted_sum_2 = np.dot(self.__W2, self.__A1).T + self.__b2
-        
+
         self.__A2 = 1/(1 + np.exp(-weighted_sum_2))
-        
+
         return self.__A1, self.__A2
