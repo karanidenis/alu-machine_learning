@@ -32,6 +32,6 @@ class NeuralNetwork:
         # w2 - weight vector of output neuron
         self.W2 = np.random.randn(1, nodes)
         # b2 - bias of output neuron
-        self.b2 = np.zeros((1 ,nodes))
+        self.b2 = np.zeros((1, nodes))
         # A2 - activated output of output neuron
         self.A2 = 0
