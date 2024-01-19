@@ -17,10 +17,6 @@ class DeepNeuralNetwork:
         if nx < 1:
             raise ValueError("nx must be a positive integer")
 
-        # if not isinstance(layers, list) or len(layers) < 1:
-        #     raise TypeError("layers must be a list of positive integers")
-        # if not all(isinstance(layer, int) and layer > 0 for layer in layers):
-        #     raise TypeError("layers must be a list of positive integers")
         if (
             type(layers) is not list
             or len(layers) < 1
@@ -75,6 +71,6 @@ class DeepNeuralNetwork:
             A_prev = self.__cache[f'A{l-1}']
 
             Z = np.dot(W, A_prev) + b
-            self.__cache[f'A{l}'] =  1 / (1 + np.exp(-Z))
+            self.__cache[f'A{l}'] = 1 / (1 + np.exp(-Z))
 
         return self.__cache[f'A{self.__L}'], self.__cache
