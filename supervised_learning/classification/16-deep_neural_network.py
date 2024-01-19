@@ -19,9 +19,8 @@ class DeepNeuralNetwork:
 
         if not isinstance(layers, list) or len(layers) < 1:
             raise TypeError("layers must be a list of positive integers")
-        for i in layers:
-            if i < 1:
-                raise TypeError("layers must be a list of positive integers")
+        if not all(isinstance(layers, list) and layer > 0 for layer in layers):
+            raise TypeError("layers must be a list of positive integers")
 
         # self.L - no. of layers in the neural network
         self.L = len(layers)
@@ -30,9 +29,10 @@ class DeepNeuralNetwork:
 
         # weights - dict of all weights and biases of the network
         self.weights = {}
+        layer_sizes = [nx] + layers
         for l in range(1, self.L + 1):
-            layer_size = layers[l - 1]
-            prev_layer_size = nx if l == 1 else layers[l - 2]
+            # layer_size = layers[l - 1]
+            # prev_layer_size = nx if l == 1 else layers[l - 2]
             self.weights[f'W{l}'] = np.random.randn(
-                layer_size, prev_layer_size) * np.sqrt(2. / prev_layer_size)
-            self.weights[f'b{l}'] = np.zeros((layer_size, 1))
+                layer_sizes[l], layer_sizes[l-1]) * np.sqrt(2. / layer_sizes[l-1])
+            self.weights[f'b{l}'] = np.zeros((layer_sizes[l], 1))
