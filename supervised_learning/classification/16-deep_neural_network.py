@@ -31,14 +31,14 @@ class DeepNeuralNetwork:
 
         # weights - dict of all weights and biases of the network
         self.weights = {}
-        for l in range(self.L):
-            if l == 0:
+        for layer in range(self.L):
+            if layer == 0:
                 self.weights['W1'] = np.random.randn(
                     layers[0], nx) * np.sqrt(2 / nx)
                 self.weights['b1'] = np.zeros([layers[0], 1])
 
             else:
-                self.weights['W{}'.format(l+1)] = np.random.randn(
-                    layers[l], layers[l-1]) * np.sqrt(2. / layers[l-1])
+                self.weights['W{}'.format(layer+1)] = np.random.randn(
+                    layers[layer], layers[layer-1]) * np.sqrt(2. / layers[layer-1])
 
-                self.weights['b{}'.format(l+1)] = np.zeros((layers[l], 1))
+                self.weights['b{}'.format(layer+1)] = np.zeros((layers[layer], 1))
