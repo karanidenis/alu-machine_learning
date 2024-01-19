@@ -90,5 +90,5 @@ class DeepNeuralNetwork:
         # print(A.shape)
         cost = self.cost(Y, A)
         predictions = (A >= 0.5).astype(int)
-        
+
         return predictions, cost
