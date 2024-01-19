@@ -130,7 +130,7 @@ class DeepNeuralNetwork:
     #         self.gradient_descent(Y, cache, alpha)
 
     #     return self.evaluate(X, Y)
-    
+
     def train(self, X, Y, iterations=5000, alpha=0.05, verbose=True, graph=True, step=100):
         """Train the deep neural network"""
         if not isinstance(iterations, int):
