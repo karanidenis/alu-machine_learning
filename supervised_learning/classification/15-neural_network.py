@@ -143,7 +143,7 @@ class NeuralNetwork:
 
         if not isinstance(step, int):
             raise TypeError("step must be an integer")
-        if step < 0 or step <= iterations:
+        if step < 0 or step > iterations:
             raise ValueError("step must be positive and <= iterations")
 
         plotting_costs = []
@@ -155,15 +155,16 @@ class NeuralNetwork:
             for iteration in range(iterations):
                 A1, A2 = self.forward_prop(X)
                 self.gradient_descent(X, Y, A1, A2, alpha)
-                cost = self.cost(Y, A2)
-                plotting_costs.append(cost)
+                if (iteration % step) == 0 or iteration == (iterations - 1):
+                    cost = self.cost(Y, A2)
+                    plotting_costs.append(cost)
 
-                if verbose:
-                    print(f"Cost after {iteration} iterations: {cost}")
+                    if verbose:
+                        print(f"Cost after {iteration} iterations: {cost}")
 
-            # plotting
+                # plotting
             plt.plot(plotting_steps, plotting_costs)
             plt.xlabel("iteration")
-            plt.ylable("cost")
+            plt.ylabel("cost")
             plt.title("Training cost")
             plt.show()
