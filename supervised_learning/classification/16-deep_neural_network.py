@@ -38,7 +38,7 @@ class DeepNeuralNetwork:
                 self.weights['b1'] = np.zeros([layers[0], 1])
 
             else:
-                self.weights[f'W{l + 1}'] = np.random.randn(
+                self.weights['W{}'.format(l+1)] = np.random.randn(
                     layers[l], layers[l-1]) * np.sqrt(2. / layers[l-1])
 
-                self.weights[f'b{l}'] = np.zeros((layers[l], 1))
+                self.weights['b{}'.format(l+1)] = np.zeros((layers[l], 1))
