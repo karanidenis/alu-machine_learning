@@ -101,19 +101,14 @@ class DeepNeuralNetwork:
         dz = A - Y
 
         for l in reversed(range(1, self.__L + 1)):
-            A_prev = self.__cache['A{}'.format(l-1)]
-            W = self.__weights['W{}'.format(l)]
-            b = self.__weights['b{}'.format(l)]
-
-            dW = (1 / m) * np.dot(dz, A_prev.T)
+            # dW = (1 / m) * np.dot(dz, A_prev.T)
+            dw = np.matmul(cache["A{}".format(l - 1)], dz.T) / m
             db = (1 / m) * np.sum(dz, axis=1, keepdims=True)
 
             # Update weights
-            self.__weights['W{}'.format(l)] -= alpha * dW
-            self.__weights['b{}'.format(l)] -= alpha * db
-
-            if l > 1:
-                A_prev = self.__cache['A{}'.format(l - 1)]
-                dz = np.dot(W.T, dz) * A_prev * (1 - A_prev)
+            da = cache["A{}".format(l - 1)] * (1 - cache["A{}".format(l - 1)])
+            dz = np.matmul(self.__weights["W{}".format(l)].T, dz) * da
+            self.__weights["W{}".format(l)] -= alpha * dw.T
+            self.__weights["b{}".format(l)] -= alpha * db
 
         return self.__weights
