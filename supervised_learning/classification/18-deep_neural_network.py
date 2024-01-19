@@ -66,11 +66,11 @@ class DeepNeuralNetwork:
         self.__cache['A0'] = X
 
         for l in range(1, self.__L+1):
-            W = self.__weights[f'W{l}']
-            b = self.__weights[f'b{l}']
-            A_prev = self.__cache[f'A{l-1}']
+            W = self.__weights['W{}'.format(l)]
+            b = self.__weights['b{}'.format(l)]
+            A_prev = self.__cache['A{}'.format(l-1)]
 
             Z = np.dot(W, A_prev) + b
-            self.__cache[f'A{l}'] = 1 / (1 + np.exp(-Z))
+            self.__cache['A{}'.format(l)] = 1 / (1 + np.exp(-Z))
 
-        return self.__cache[f'A{self.__L}'], self.__cache
+        return self.__cache['A{}'.format(self.__L)], self.__cache
