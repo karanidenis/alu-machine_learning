@@ -109,7 +109,7 @@ class DeepNeuralNetwork:
 #             db = (1 / m) * np.sum(dz, axis=1, keepdims=True)
 
 #             # Update weights
-#             da = cache["A{}".format(l - 1)] * (1 - cache["A{}".format(l - 1)])
+#         da = cache["A{}".format(l - 1)] * (1 - cache["A{}".format(l - 1)])
 #             dz = np.matmul(self.__weights["W{}".format(l)].T, dz) * da
 #             self.__weights["W{}".format(l)] -= alpha * dw.T
 #             self.__weights["b{}".format(l)] -= alpha * db
@@ -133,7 +133,8 @@ class DeepNeuralNetwork:
 
 #     #     return self.evaluate(X, Y)
 
-#     def train(self, X, Y, iterations=5000, alpha=0.05, verbose=True, graph=True, step=100):
+#     def train(self, X, Y, iterations=5000, alpha=0.05,
+# verbose=True, graph=True, step=100):
 #         """Train the deep neural network"""
 #         if not isinstance(iterations, int):
 #             raise TypeError("iterations must be an integer")
