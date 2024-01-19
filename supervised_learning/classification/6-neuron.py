@@ -131,14 +131,7 @@ class Neuron:
         # if not isinstance(alpha, float):
         #     raise TypeError("alpha must be a float")
         # if alpha <= 0.0:
-        #     raise ValueError("alpha must be positive")
-
-        # for i in range(iterations):
-        #     A = self.forward_prop(X)
-        #     self.gradient_descent(X, Y, A, alpha=0.05)
-        #     # if i % 1000 == 0:
-        #     #     cost = self.cost(Y, A)
-        #     #     print(f"cost after iteration {i}: {cost}")
+        #     raise ValueError("alpha must be pos
 
         # return self.evaluate(X, Y)
         if not isinstance(iterations, int):
