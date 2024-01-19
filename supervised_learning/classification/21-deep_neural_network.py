@@ -113,7 +113,7 @@ class DeepNeuralNetwork:
             self.__weights['b{}'.format(l)] -= alpha * db
 
             if l > 1:
-                A_prev = self.__cache[f'A{l - 1}']
+                A_prev = self.__cache['A{}'.format(l - 1)]
                 dz = np.dot(W.T, dz) * A_prev * (1 - A_prev)
 
         return self.__weights
