@@ -35,14 +35,17 @@ class DeepNeuralNetwork:
         self.__cache = {}
 
         # weights - dict of all weights and biases of the network
-        self.__weights = {}
-        layer_sizes = [nx] + layers
-        for l in range(1, self.__L + 1):
-            # layer_size = layers[l - 1]
-            # prev_layer_size = nx if l == 1 else layers[l - 2]
-            self.__weights[f'W{l}'] = np.random.randn(
-                layer_sizes[l], layer_sizes[l-1]) * np.sqrt(2. / layer_sizes[l-1])
-            self.__weights[f'b{l}'] = np.zeros((layer_sizes[l], 1))
+        self.weights = {}
+        for l in range(1, self.L + 1):
+            if l == 0:
+                self.__weights['W1'] = np.random.randn(
+                    layers[0], nx) * np.sqrt(2 / nx)
+                self.__weights['b1'] = np.zeros([layers[0], 1])
+
+            else:
+                self.__weights[f'W{l + 1}'] = np.random.randn(
+                    layers[l], layers[l-1]) * np.sqrt(2. / layers[l-1])
+                self.__weights[f'b{l}'] = np.zeros((layers[l], 1))
 
     @property
     def L(self):
