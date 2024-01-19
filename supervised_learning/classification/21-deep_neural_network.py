@@ -109,8 +109,8 @@ class DeepNeuralNetwork:
             db = (1 / m) * np.sum(dz, axis=1, keepdims=True)
 
             # Update weights
-            self.__weights[f'W{l}'] -= alpha * dW
-            self.__weights[f'b{l}'] -= alpha * db
+            self.__weights['W{}'.format(l)] -= alpha * dW
+            self.__weights['b{}'.format(l)] -= alpha * db
 
             if l > 1:
                 A_prev = self.__cache[f'A{l - 1}']
