@@ -15,12 +15,10 @@ def forward_prop(x, layer_sizes=[], activations=[]):
     activations - list containing activation functions for each layer
     returns prediction of the network in tensor form
     """
-    a = create_layer(x, layer_sizes[0], activations[0])
+    a = x
+
     if len(layer_sizes) == len(activations):
-        for i in layer_sizes:
+        for i in range(len(layer_sizes)):
             a = create_layer(a, layer_sizes[i], activations[i])
 
-    sess = tf.Session()
-    init = tf.global_variables_initializer()
-    sess.run(init)
-    return sess.run(a)
+    return a
