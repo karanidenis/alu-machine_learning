@@ -8,8 +8,12 @@ import tensorflow as tf
 
 
 def create_placeholders(nx, classes):
-	"""nx - no. of feauture columns in data
-	classe - no. of classes in out classifier
-	x - placeholder for input data
-	y - placeholder for one-hot labels for input data
-	"""
+    """nx - no. of feauture columns in data
+    classe - no. of classes in out classifier
+    x - placeholder for input data
+    y - placeholder for one-hot labels for input data
+    """
+    X = tf.placeholder(tf.float32, hape=[None, nx], name='X')
+    Y = tf.placeholder(tf.float32, shape=[None, classes], name='Y')
+
+    return X, Y
