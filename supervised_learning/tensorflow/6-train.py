@@ -74,13 +74,13 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
                 accuracy, feed_dict={X: X_valid, Y: Y_valid})
 
             if epoch % 100 == 0:
-                print("After {} iterations:".format(epoch))
-                print("    Training Cost: {}".format(epoch_loss))
-                print("    Training Accuracy: {}".format(
-                    epoch_accuracy))
-                print("    Validation Cost: {}".format(valid_loss))
-                print("    Validation Accuracy: {}".format(
-                    valid_accuracy))
+                #     print("After {} iterations:".format(epoch))
+                #     print("    Training Cost: {}".format(epoch_loss))
+                #     print("    Training Accuracy: {}".format(
+                #         epoch_accuracy))
+                #     print("    Validation Cost: {}".format(valid_loss))
+                #     print("    Validation Accuracy: {}".format(
+                #         valid_accuracy))
 
                 print("After {} iterations: \n\tTraining Cost: {} \n\tTraining Accuracy: {} \n\tValidation Cost: {} \n\tValidation Accuracy: {}".format(
                     epoch, epoch_loss, epoch_accuracy, valid_loss, valid_accuracy))
