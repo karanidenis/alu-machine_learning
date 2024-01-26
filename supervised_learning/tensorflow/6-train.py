@@ -81,7 +81,7 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
 
             # if epoch % 100 == 0:
             if epoch % 100 is 0:
-                print("After {} iterations: ".format(epoch))
+                print("After {} iterations:".format(epoch))
                 print("\tTraining Cost: {}".format(epoch_loss))
                 print("\tTraining Accuracy: {}".format(epoch_accuracy))
                 print("\tValidation Cost: {}".format(valid_loss))
