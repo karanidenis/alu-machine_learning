@@ -57,7 +57,7 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
         sess.run(init)
 
         # Training loop
-        for epoch in range(iterations):
+        for epoch in range(iterations + 1):
             epoch_loss = 0
             # Code to process x_train, y_train in batches
             # And run optimizer and calculate loss
@@ -73,7 +73,7 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
             valid_accuracy = sess.run(
                 accuracy, feed_dict={X: X_valid, Y: Y_valid})
 
-            if epoch % 100 == 0:
+            if epoch % 100 == 0 or :
                 print("After {} iterations:".format(epoch))
                 print("    Training Cost: {}".format(epoch_loss))
                 print("    Training Accuracy: {}".format(
