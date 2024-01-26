@@ -16,7 +16,9 @@ def calculate_loss(y, y_pred):
     """
     # Convert y_pred to discrete labels
     true_labels = tf.argmax(y, 1)
+    predicted_labels = tf.argmax(y_pred, 1)
 
-    loss = tf.losses.mean_squared_error(labels=true_labels, predictions=y_pred)
+    loss = tf.losses.mean_squared_error(
+        labels=true_labels, predictions=predicted_labels)
 
     return loss
