@@ -53,17 +53,17 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
     train_op = create_train_op(loss, alpha)
     tf.add_to_collection('train_op', train_op)
 
+    saver = tf.train.Saver()
+
     # Step 5: Initialize Global Variables
     init = tf.global_variables_initializer()
-
-    saver = tf.train.Saver()
 
     # Step 6: Start TensorFlow Session
     with tf.Session() as sess:
         sess.run(init)
 
         # Training loop
-        for epoch in range(iterations + 1):
+        for epoch in range(iterations):
             epoch_loss = 0
             # Code to process x_train, y_train in batches
             # And run optimizer and calculate loss
