@@ -82,6 +82,9 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
                 print("    Validation Accuracy: {}".format(
                     valid_accuracy))
 
+                print("After {} iterations \n\tTraining Cost: {} \n\tTraining Accuracy: {} \n\tValidation Cost: {} \n\tValidation Accuracy: {}".format(
+                    epoch, epoch_loss, epoch_accuracy, valid_loss, valid_accuracy))
+
         save_path = saver.save(sess, save_path)
 
     return save_path
