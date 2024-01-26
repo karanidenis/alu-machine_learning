@@ -73,7 +73,8 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
             valid_accuracy = sess.run(
                 accuracy, feed_dict={X: X_valid, Y: Y_valid})
 
-            if epoch % 100 == 0:
+            # if epoch % 100 == 0:
+            if epoch % 100 == 0 or (epoch == iterations and iterations % 100 < 50):
                 #     print("After {} iterations:".format(epoch))
                 #     print("    Training Cost: {}".format(epoch_loss))
                 #     print("    Training Accuracy: {}".format(
