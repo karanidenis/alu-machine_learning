@@ -80,7 +80,7 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
                 accuracy, feed_dict={X: X_valid, Y: Y_valid})
 
             # if epoch % 100 == 0:
-            if epoch % 100 is 0 or (epoch == iterations and iterations % 100 < 50):
+            if epoch % 100 is 0:
                 print("After {} iterations: ".format(epoch))
                 print("\tTraining Cost: {}".format(epoch_loss))
                 print("\tTraining Accuracy: {}".format(epoch_accuracy))
