@@ -22,6 +22,8 @@ def forward_prop(x, layer_sizes=[], activations=[]):
     a = x
 
     for i in range(len(layer_sizes)):
-        a = create_layer(a, layer_sizes[i], activations[i])
+        with tf.variable_scope("layer_" + str(i)):
+            a = create_layer(a, layer_sizes[i], activations[i])
+        # a = create_layer(a, layer_sizes[i], activations[i])
 
     return a
