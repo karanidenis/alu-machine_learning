@@ -84,10 +84,10 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
                 #         valid_accuracy))
 
                 print("After {} iterations:".format(epoch))
-                print("  Training Cost: {}".format(epoch_loss))
-                print(" Training Accuracy: {}".format(epoch_accuracy))
-                print(" Validation Cost: {}".format(valid_loss))
-                print(" Validation Accuracy: {}".format(valid_accuracy))
+                print("          Training Cost: {}".format(epoch_loss))
+                print("          Training Accuracy: {}".format(epoch_accuracy))
+                print("          Validation Cost: {}".format(valid_loss))
+                print("          Validation Accuracy: {}".format(valid_accuracy))
 
         save_path = saver.save(sess, save_path)
 
