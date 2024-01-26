@@ -34,18 +34,24 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
     nx = X_train.shape[1]  # Number of features
     classes = Y_train.shape[1]  # Number of classes
     X, Y = create_placeholders(nx, classes)
+    tf.add_to_collection('X', X)
+    tf.add_to_collection('Y', Y)
 
     # Step 2: Build the Neural Network
     y_pred = forward_prop(X, layer_sizes, activations)
+    tf.add_to_collection('y_pred', y_pred)
 
     # Step 3: Calculate accuracy
     accuracy = calculate_accuracy(Y, y_pred)
+    tf.add_to_collection('accuracy', accuracy)
 
     # Step 4: Define the Loss Function
     loss = calculate_loss(Y, y_pred)
+    tf.add_to_collection('loss', loss)
 
     # Step 5: Define the Optimizer & train op
     train_op = create_train_op(loss, alpha)
+    tf.add_to_collection('train_op', train_op)
 
     # Step 5: Initialize Global Variables
     init = tf.global_variables_initializer()
