@@ -64,19 +64,22 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
 
             _, epoch_loss = sess.run([train_op, loss], feed_dict={
                                      X: X_train, Y: Y_train})
+
             epoch_accuracy = sess.run(
                 accuracy, feed_dict={X: X_train, Y: Y_train})
+
             valid_loss = sess.run(loss, feed_dict={X: X_valid, Y: Y_valid})
+
             valid_accuracy = sess.run(
                 accuracy, feed_dict={X: X_valid, Y: Y_valid})
 
             if epoch % 100 == 0 or epoch == iterations - 1:
-                print("After {epoch} iterations:".format(epoch))
-                print("    Training Cost: {epoch_loss}".format(epoch_loss))
-                print("    Training Accuracy: {epoch_accuracy}".format(
+                print("After {} iterations:".format(epoch))
+                print("    Training Cost: {}".format(epoch_loss))
+                print("    Training Accuracy: {}".format(
                     epoch_accuracy))
-                print("    Validation Cost: {valid_loss}".format(valid_loss))
-                print("    Validation Accuracy: {valid_accuracy}".format(
+                print("    Validation Cost: {}".format(valid_loss))
+                print("    Validation Accuracy: {}".format(
                     valid_accuracy))
 
         save_path = saver.save(sess, save_path)
