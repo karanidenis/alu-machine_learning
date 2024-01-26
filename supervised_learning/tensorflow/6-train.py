@@ -71,11 +71,13 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
                 accuracy, feed_dict={X: X_valid, Y: Y_valid})
 
             if epoch % 100 == 0 or epoch == iterations - 1:
-                print(f"After {epoch} iterations:")
-                print(f"    Training Cost: {epoch_loss}")
-                print(f"    Training Accuracy: {epoch_accuracy}")
-                print(f"    Validation Cost: {valid_loss}")
-                print(f"    Validation Accuracy: {valid_accuracy}")
+                print("After {epoch} iterations:".format(epoch))
+                print("    Training Cost: {epoch_loss}".format(epoch_loss))
+                print("    Training Accuracy: {epoch_accuracy}".format(
+                    epoch_accuracy))
+                print("    Validation Cost: {valid_loss}".format(valid_loss))
+                print("    Validation Accuracy: {valid_accuracy}".format(
+                    valid_accuracy))
 
         save_path = saver.save(sess, save_path)
 
