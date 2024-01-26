@@ -22,7 +22,6 @@ def calculate_loss(y, y_pred):
     # labels=true_labels, predictions=predicted_labels)
     loss = tf.reduce_mean(
         tf.nn.softmax_cross_entropy_with_logits(
-            labels=y, logits=y_pred))
-    # labels=true_labels, logits=predicted_labels))
+            labels=y, logits=y_pred),  name="softmax_cross_entropy_loss/value")
 
     return loss
