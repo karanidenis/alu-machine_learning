@@ -25,7 +25,58 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
     iterations - no. of iterations to train over
     save_path - designates where to save the model
     graphs collection: - placeholders x & y
-                       - tensors(y_pred, loss, accuracy)
-                       - train_op
+                      - tensors(y_pred, loss, accuracy)
+                      - train_op
     returns the path where the model was saved
     """
+
+    # create placeholders
+    nx = X_train.shape[1]  # Number of features
+    classes = Y_train.shape[1]  # Number of classes
+    X, Y = create_placeholders(nx, classes)
+
+    # Step 2: Build the Neural Network
+    y_pred = forward_prop(X, layer_sizes, activations)
+
+    # Step 3: Calculate accuracy
+    accuracy = calculate_accuracy(Y, y_pred)
+
+    # Step 4: Define the Loss Function
+    loss = calculate_loss(Y, y_pred)
+
+    # Step 5: Define the Optimizer & train op
+    train_op = create_train_op(loss, alpha)
+
+    # Step 5: Initialize Global Variables
+    init = tf.global_variables_initializer()
+
+    saver = tf.train.Saver()
+
+    # Step 6: Start TensorFlow Session
+    with tf.Session() as sess:
+        sess.run(init)
+
+        # Training loop
+        for epoch in range(iterations):
+            epoch_loss = 0
+            # Code to process x_train, y_train in batches
+            # And run optimizer and calculate loss
+
+            _, epoch_loss = sess.run([train_op, loss], feed_dict={
+                                     X: X_train, Y: Y_train})
+            epoch_accuracy = sess.run(
+                accuracy, feed_dict={X: X_train, Y: Y_train})
+            valid_loss = sess.run(loss, feed_dict={X: X_valid, Y: Y_valid})
+            valid_accuracy = sess.run(
+                accuracy, feed_dict={X: X_valid, Y: Y_valid})
+
+            if epoch % 100 == 0 or epoch == iterations - 1:
+                print(f"After {epoch} iterations:")
+                print(f"    Training Cost: {epoch_loss}")
+                print(f"    Training Accuracy: {epoch_accuracy}")
+                print(f"    Validation Cost: {valid_loss}")
+                print(f"    Validation Accuracy: {valid_accuracy}")
+
+        save_path = saver.save(sess, save_path)
+
+    return save_path
