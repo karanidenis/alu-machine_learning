@@ -38,7 +38,7 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
             A_prev = cache["A{}".format(l-1)]
             
          # Check shapes
-        assert dZ.shape[0] == weights["W{}".format(l)].shape[0], f"Shape mismatch in dZ for layer {l}"
+        assert dZ.shape[0] == weights["W{}".format(l)].shape[0], "Shape mismatch in dZ for layer {}".format(l)
         # assert A_prev.shape[1] == X_train.shape[1], f"Shape mismatch in A_prev for layer {l}"
     
         W = weights["W{}".format(l)]
