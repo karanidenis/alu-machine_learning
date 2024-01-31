@@ -7,7 +7,7 @@ import numpy as np
 
 
 def l2_reg_cost(cost, lambtha, weights, L, m):
-    """returns cost of the network accounting 
+    """returns cost of the network accounting
     for L2 regularization
     cost - cost of network without L2
     lambtha regularization param
