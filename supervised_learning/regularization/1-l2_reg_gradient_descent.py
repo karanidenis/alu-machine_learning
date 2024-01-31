@@ -35,7 +35,7 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
             A_prev = cache['A0']
     else:
         # For other layers, use the previous layer's activation
-        A_prev = cache[f"A{l-1}"]
+        A_prev = cache["A{}".format(l-1)]
         W = weights["W{}".format(l)]
         dW = (1/m) * np.dot(dZ, A_prev.T) + (lambtha/m) * W
         db = (1/m) * np.sum(dZ, axis=1, keepdims=True)
