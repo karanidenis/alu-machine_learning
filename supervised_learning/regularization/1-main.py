@@ -29,6 +29,8 @@ if __name__ == '__main__':
     weights['b2'] = np.zeros((128, 1))
     weights['W3'] = np.random.randn(10, 128)
     weights['b3'] = np.zeros((10, 1))
+    
+    # assert A_prev.shape[1] == X_train.shape[1], f"Shape mismatch in A_prev for layer {l}"
 
     cache = {}
     cache['A0'] = X_train
