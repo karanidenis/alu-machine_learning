@@ -37,7 +37,7 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
         gradients["db{}".format(l)] = db
 
         if l > 1:  # No need to compute dZ for the input layer
-            W_prev = weights[f"W{l-1}"]
+            W_prev = weights["W{}".format(l-1)]
             # Derivative for tanh
             dZ = np.dot(W.T, dZ) * (1 - np.power(A_prev, 2))
 
