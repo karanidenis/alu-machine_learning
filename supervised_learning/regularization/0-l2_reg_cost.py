@@ -3,8 +3,6 @@
 """this module has a function that calculates
 cost of  a neural entwork with L2 regularization"""
 
-import numpy as np
-
 
 def l2_reg_cost(cost, lambtha, weights, L, m):
     """returns cost of the network accounting
