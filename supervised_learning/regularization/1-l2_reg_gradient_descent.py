@@ -42,8 +42,8 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
             dZ = np.dot(W.T, dZ) * (1 - np.power(A_prev, 2))
 
     for l in range(1, L + 1):
-        weights[f"W{l}"] = (1 - alpha * (lambtha / m)) * \
+        weights["W{}".format(l)] = (1 - alpha * (lambtha / m)) * \
             weights["W{}".format(l)] - alpha * gradients["dW{}".format(l)]
-        weights[f"b{l}"] -= alpha * gradients[f"db{l}"]
+        weights["b{}".format(l)] -= alpha * gradients["db{}".format(l)]
 
     return gradients
