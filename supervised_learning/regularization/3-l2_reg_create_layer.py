@@ -15,17 +15,18 @@ def l2_reg_create_layer(prev, n, activation, lambtha):
     lambtha - L2 regularization param
     returns output of the new layer
     """
-    
-    # outputs = activation(inputs * kernel + bias) 
+
+    # outputs = activation(inputs * kernel + bias)
     # activation - activation function (if not None)
-    # kernel is a weights matrix created by the layer, 
+    # kernel is a weights matrix created by the layer,
     # and bias is a bias vector created by the layer (only if use_bias is True).
-    
-    
+
     from keras import regularizers
     from keras.layers import Dense
     from keras.models import Sequential
-    
+
     model = Sequential([
         Dense(output_dim=n, input_dim=prev, activation=activation,
-        kernel_regularizer=lambtha)])
+              kernel_regularizer=lambtha)])
+
+    return model
