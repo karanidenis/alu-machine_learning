@@ -12,4 +12,9 @@ def dropout_gradient_descent(Y, weights, cache, alpha, keep_prob, L):
         classes - no. of classes
         m - no. of data points
     weights - dict of weights and biases
-    cache - dict of outputs and dropout masks"""
+    cache - dict of outputs and dropout masks
+    alpha - learning rate
+    keep_prob - probability a node being kept
+    L - no. of layers"""
+    
+    
