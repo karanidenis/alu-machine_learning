@@ -52,3 +52,13 @@ Regularization is the process of adding information in order to solve an ill-pos
 
 
 0x05-regularization/0-weights.py: def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L): # Path: supervised_learning/regularization/0-weights.py
+
+0x06-keras/3-l2_reg_create_layer.py: def l2_reg_create_layer(prev, n, activation, lambtha): # Path: supervised_learning/regularization/0-weights.py
+    def l2_reg_create_layer(prev, n, activation, lambtha):
+        """Creates a tensorflow layer that includes L2 regularization"""
+        kernel = tf.contrib.layers.variance_scaling_initializer(mode="FAN_AVG")
+        l2 = tf.contrib.layers.l2_regularizer(lambtha)
+        layer = tf.layers.Dense(units=n, activation=activation,
+                                kernel_initializer=kernel,
+                                kernel_regularizer=l2)
+        return layer(prev)

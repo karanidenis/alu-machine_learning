@@ -4,6 +4,7 @@
 a tensorflow layer that includes L2 regularization"""
 
 import numpy as np
+import tensorflow as tf
 
 
 def l2_reg_create_layer(prev, n, activation, lambtha):
@@ -21,12 +22,18 @@ def l2_reg_create_layer(prev, n, activation, lambtha):
     # kernel is a weights matrix created by the layer,
     # and bias is a bias vector created by the layer (only if use_bias is True).
 
-    from keras import regularizers
-    from keras.layers import Dense
-    from keras.models import Sequential
+    # from keras import regularizers
+    # from keras.layers import Dense
+    # from keras.models import Sequential
 
-    model = Sequential([
-        Dense(output_dim=n, input_dim=prev, activation=activation,
-              kernel_regularizer=lambtha)])
+    # model = Sequential([
+    #     Dense(output_dim=n, input_dim=prev, activation=activation,
+    #           kernel_regularizer=lambtha)])
+    # return model
 
-    return model
+    kernel = tf.contrib.layers.variance_scaling_initializer(mode="FAN_AVG")
+    l2 = tf.contrib.layers.l2_regularizer(lambtha)
+    layer = tf.layers.Dense(units=n, activation=activation,
+                            kernel_initializer=kernel,
+                            kernel_regularizer=l2)
+    return layer(prev)
