@@ -107,3 +107,12 @@ Regularization is the process of adding information in order to solve an ill-pos
             weights['W' + str(i)] = W - (alpha * dW)
             weights['b' + str(i)] = b - (alpha * db)
         return weights
+
+0x07-def dropout_create_layer(prev, n, activation, keep_prob):
+    def dropout_create_layer(prev, n, activation, keep_prob):
+        """Creates a layer of a neural network using dropout"""
+        init = tf.contrib.layers.variance_scaling_initializer(mode="FAN_AVG")
+        layer = tf.layers.Dense(units=n, activation=activation,
+                                kernel_initializer=init)
+        dropout = tf.layers.Dropout(keep_prob)
+        return dropout(layer(prev))
