@@ -116,3 +116,14 @@ Regularization is the process of adding information in order to solve an ill-pos
                                 kernel_initializer=init)
         dropout = tf.layers.Dropout(keep_prob)
         return dropout(layer(prev))
+
+0x07-def early_stopping(cost, opt_cost, threshold, patience, count):
+    def early_stopping(cost, opt_cost, threshold, patience, count):
+        """Determines if you should stop gradient descent early"""
+        if opt_cost - cost > threshold:
+            count = 0
+        else:
+            count += 1
+        if count == patience:
+            return True, count
+        return False, count
