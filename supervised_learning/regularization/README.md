@@ -85,3 +85,25 @@ Regularization is the process of adding information in order to solve an ill-pos
                 cache['D' + str(i + 1)] = D
             cache['A' + str(i + 1)] = A
         return cache
+
+0x06-keras/3-l2_reg_create_layer.py: def dropout_gradient_descent(Y, weights, cache, alpha, keep_prob, L):
+    def dropout_gradient_descent(Y, weights, cache, alpha, keep_prob, L):
+        """Conducts forward propagation using Dropout"""
+        m = Y.shape[1]
+        for i in range(L, 0, -1):
+            A = cache['A' + str(i)]
+            A_prev = cache['A' + str(i - 1)]
+            W = weights['W' + str(i)]
+            b = weights['b' + str(i)]
+            if i == L:
+                dZ = A - Y
+            else:
+                dZ = dA * (1 - (A ** 2))
+                dZ = np.multiply(dZ, cache['D' + str(i)])
+                dZ /= keep_prob
+            dW = (1 / m) * np.matmul(dZ, A_prev.T)
+            db = (1 / m) * np.sum(dZ, axis=1, keepdims=True)
+            dA = np.matmul(W.T, dZ)
+            weights['W' + str(i)] = W - (alpha * dW)
+            weights['b' + str(i)] = b - (alpha * db)
+        return weights
