@@ -19,3 +19,14 @@ Regularization is the process of adding information in order to solve an ill-pos
 
 - Gradient noise injection - add noise to gradient during training. It is used to prevent overfitting. It is useful when training for a long time.
 - ...
+
+...
+0x05-regularization/0-weights.py: def l2_reg_cost(cost, lambtha, weights, L, m): # Path: supervised_learning/regularization/0-weights.py
+    def l2_reg_cost(cost, lambtha, weights, L, m): 
+        """Calculates the cost of a neural network with L2 regularization
+        using tensorflow
+        """
+        return cost + tf.losses.get_regularization_losses()
+        
+
+0x05-regularization/0-weights.py: def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L): # Path: supervised_learning/regularization/0-weights.py
