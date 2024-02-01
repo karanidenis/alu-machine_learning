@@ -3,7 +3,6 @@
 """this module has a function that creates
 a tensorflow layer that includes L2 regularization"""
 
-import numpy as np
 import tensorflow as tf
 
 
@@ -20,7 +19,8 @@ def l2_reg_create_layer(prev, n, activation, lambtha):
     # outputs = activation(inputs * kernel + bias)
     # activation - activation function (if not None)
     # kernel is a weights matrix created by the layer,
-    # and bias is a bias vector created by the layer (only if use_bias is True).
+    # and bias is a bias vector created by the layer
+    # (only if use_bias is True).
 
     # from keras import regularizers
     # from keras.layers import Dense
