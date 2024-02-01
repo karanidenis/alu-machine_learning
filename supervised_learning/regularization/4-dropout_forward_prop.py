@@ -3,6 +3,8 @@
 """this module has a function that conducts
 forward propagation using Dropout"""
 
+import numpy as np
+
 
 def dropout_forward_prop(X, weights, L, keep_prob):
     """forward propagation using dropout
@@ -15,15 +17,6 @@ def dropout_forward_prop(X, weights, L, keep_prob):
     tanh activation excpet last layer - softmax
     return dict of outputs of each layer and dropout mask used
     on each layer"""
-
-    # weighted sum
-    # for i in range(L, 0, -1):
-    #     weighted_sum = np.dot(weights['W'+ str(i)], X) + weights['b' + str(i)]
-    #     # applying activation function - tanh / softmax
-    #     A = 1/(1 + np.exp(-weighted_sum))
-
-    # return A
-    import numpy as np
 
     cache = {}
     cache['A0'] = X
