@@ -21,12 +21,34 @@ Regularization is the process of adding information in order to solve an ill-pos
 - ...
 
 ...
+0x01-regularization/0-l2_reg_cost.py: def l2_reg_cost(cost): # Path: supervised_learning/regularization/0-l2_reg_cost.py
+    def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
+        """Updates the weights and biases of a neural network using gradient
+        descent with L2 regularization
+        """
+        m = Y.shape[1]
+        for i in range(L, 0, -1):
+            A = cache['A' + str(i)]
+            A_prev = cache['A' + str(i - 1)]
+            W = weights['W' + str(i)]
+            b = weights['b' + str(i)]
+            if i == L:
+                dZ = A - Y
+            else:
+                dZ = dA * (1 - (A ** 2))
+            dW = (1 / m) * np.matmul(dZ, A_prev.T) + ((lambtha / m) * W)
+            db = (1 / m) * np.sum(dZ, axis=1, keepdims=True)
+            dA = np.matmul(W.T, dZ)
+            weights['W' + str(i)] = W - (alpha * dW)
+            weights['b' + str(i)] = b - (alpha * db)
+        return weights
+
 0x05-regularization/0-weights.py: def l2_reg_cost(cost, lambtha, weights, L, m): # Path: supervised_learning/regularization/0-weights.py
     def l2_reg_cost(cost, lambtha, weights, L, m): 
         """Calculates the cost of a neural network with L2 regularization
         using tensorflow
         """
         return cost + tf.losses.get_regularization_losses()
-        
+
 
 0x05-regularization/0-weights.py: def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L): # Path: supervised_learning/regularization/0-weights.py
