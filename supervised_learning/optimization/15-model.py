@@ -8,9 +8,6 @@ learning rate decay, and batch normalization:
 
 import tensorflow as tf
 import numpy as np
-from create_placeholders import create_placeholders
-from create_layer import create_layer
-from create_batch_norm_layer import create_batch_norm_layer
 shuffle_data = __import__('2-shuffle_data').shuffle_data
 
 
