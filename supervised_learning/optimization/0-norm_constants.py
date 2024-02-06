@@ -3,6 +3,8 @@
 """This module contains the function that
 calculates normalization constants of a matrix"""
 
+import numpy as np
+
 
 def normalization_constants(X):
     """
