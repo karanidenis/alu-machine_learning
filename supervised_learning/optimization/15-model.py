@@ -11,17 +11,17 @@ import numpy as np
 shuffle_data = __import__('2-shuffle_data').shuffle_data
 
 
-def model(Data_train, Data_valid, layers, activations, 
-          alpha=0.001, beta1=0.9, beta2=0.999, epsilon=1e-8, 
+def model(Data_train, Data_valid, layers, activations,
+          alpha=0.001, beta1=0.9, beta2=0.999, epsilon=1e-8,
           decay_rate=1, batch_size=32, epochs=5, save_path='/tmp/model.ckpt'):
     """
     builds, trains, and saves a neural network model in tensorflow
     using Adam optimization, mini-batch gradient descent,
     learning rate decay, and batch normalization
     Data_train - tuple with training inputs and training labels, respectively
-    Data_valid - tuple with validation inputs and validation labels, respectively
+    Data_valid - tuple with validation inputs and validation labels,
     layers - is a list with the no. of nodes in each layer of the network
-    activations - list with the activation functions for each layer of the network
+    activations - list with the activation functions for each layer
     alpha - is the learning rate
     beta1 - is the weight used for the first moment
     beta2 - is the weight used for the second moment
@@ -51,7 +51,8 @@ def model(Data_train, Data_valid, layers, activations,
 
     # Create the learning rate decay operation
     global_step = tf.Variable(0, trainable=False)
-    alpha = tf.train.inverse_time_decay(alpha, global_step, decay_rate, 1, staircase=True)
+    alpha = tf.train.inverse_time_decay(alpha,
+            global_step, decay_rate, 1, staircase=True)
 
     # Create the Adam optimization operation
     optimizer = tf.train.AdamOptimizer(alpha, beta1, beta2, epsilon)
@@ -72,7 +73,7 @@ def model(Data_train, Data_valid, layers, activations,
     num_batches = m // batch_size if m % batch_size == 0 else (m // batch_size) + 1
     m_valid = X_valid.shape[0]
     num_batches_valid = m_valid // batch_size if m_valid % batch_size == 0 else (m_valid // batch_size) + 1
-    
+
     # Training loop
     for epoch in range(epochs):
         # Shuffle data at the start of each epoch
@@ -84,21 +85,24 @@ def model(Data_train, Data_valid, layers, activations,
             Y_mini = Y_train[start_i:end_i]
             session.run(train_op, feed_dict={x: X_mini, y: Y_mini})
             if i % 100 == 0 and i != 0:
-                loss_train = session.run(loss, feed_dict={x: X_mini, y: Y_mini})
-                accuracy_train = session.run(accuracy, feed_dict={x: X_mini, y: Y_mini})
+                loss_train = session.run(loss,
+                            feed_dict={x: X_mini, y: Y_mini})
+                accuracy_train = session.run(accuracy, 
+                                feed_dict={x: X_mini, y: Y_mini})
                 print("After {} batches: ".format(i))
                 print("\tTraining Cost: {}".format(loss_train))
                 print("\tTraining Accuracy: {}".format(accuracy_train))
         loss_valid = session.run(loss, feed_dict={x: X_valid, y: Y_valid})
-        accuracy_valid = session.run(accuracy, feed_dict={x: X_valid, y: Y_valid})
+        accuracy_valid = session.run(accuracy,
+                                feed_dict={x: X_valid, y: Y_valid})
         print("After {} epochs: ".format(epoch))
         print("\tTraining Cost: {}".format(loss_train))
         print("\tTraining Accuracy: {}".format(accuracy_train))
         print("\tValidation Cost: {}".format(loss_valid))
         print("\tValidation Accuracy: {}".format(accuracy_valid))
-        
+
     # Save the model
     saved_path = saver.save(session, save_path)
     session.close()
-    
+
     return saved_path
