@@ -27,66 +27,52 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32, epochs=5
     save_path - is the path to where the model should be saved after training
     Returns: the path where the model was saved"""
 
-    # shuffle the data
+    # Shuffle the training data
     X_train, Y_train = shuffle_data(X_train, Y_train)
 
+    # Load the model
+    session = tf.Session()
+    saver = tf.train.import_meta_graph(load_path + '.meta')
+    saver.restore(session, load_path)
+
+    # Access the graph
+    graph = tf.get_default_graph()
+    x = graph.get_tensor_by_name("x:0")
+    y = graph.get_tensor_by_name("y:0")
+    accuracy = graph.get_tensor_by_name("Mean_1:0")
+    loss = graph.get_tensor_by_name("Mean:0")
+    train_op = graph.get_operation_by_name("train_op")
+
+    # Calculate the number of batches for training and validation
     m = X_train.shape[0]
-    # create placeholders
-    x = tf.placeholder(tf.float32, shape=[None, 784], name='x')
-    y = tf.placeholder(tf.float32, shape=[None, 10], name='y')
+    num_batches = m // batch_size if m % batch_size == 0 else (
+        m // batch_size) + 1
 
-    # mini-batch
-    mini_batches = []
-    for i in range(0, m, batch_size):
-        X_mini = X_train[i:i + batch_size]
-        Y_mini = Y_train[i:i + batch_size]
-        mini_batches.append((X_mini, Y_mini))
+    # Training loop
+    for epoch in range(epochs):
+        # Shuffle data at the start of each epoch
+        X_train, Y_train = shuffle_data(X_train, Y_train)
+        for i in range(num_batches):
+            start_i = i * batch_size
+            end_i = start_i + batch_size
+            X_mini = X_train[start_i:end_i]
+            Y_mini = Y_train[start_i:end_i]
+            session.run(train_op, feed_dict={x: X_mini, y: Y_mini})
 
-    # load the model
-    model = tf.train.import_meta_graph(load_path + '.meta')
+        # Calculate loss and accuracy for training and validation sets
+        cost_train, acc_train = session.run(
+            [loss, accuracy], feed_dict={x: X_train, y: Y_train})
+        cost_valid, acc_valid = session.run(
+            [loss, accuracy], feed_dict={x: X_valid, y: Y_valid})
 
-    # create a saver
-    saver = tf.train.Saver()
+        print(f"After epoch {epoch + 1}/{epochs}:")
+        print(f"\tTraining Cost: {cost_train}")
+        print(f"\tTraining Accuracy: {acc_train}")
+        print(f"\tValidation Cost: {cost_valid}")
+        print(f"\tValidation Accuracy: {acc_valid}")
 
-    # create a session
-    with tf.Session() as sess:
-        # restore the model
-        model.restore(sess, load_path)
+    # Save the model
+    saved_path = saver.save(session, save_path)
+    session.close()
 
-        # get the tensors by their variable name
-        x = tf.get_default_graph().get_tensor_by_name("x:0")
-        y = tf.get_default_graph().get_tensor_by_name("y:0")
-        accuracy = tf.get_default_graph().get_tensor_by_name("Mean_1:0")
-        loss = tf.get_default_graph().get_tensor_by_name("Mean:0")
-        train_op = tf.get_default_graph().get_operation_by_name("train_op")
-
-        # train the model
-        for epoch in range(epochs + 1):
-            cost_train = sess.run(loss, feed_dict={x: X_train, y: Y_train})
-            acc_train = sess.run(accuracy, feed_dict={x: X_train, y: Y_train})
-            cost_valid = sess.run(loss, feed_dict={x: X_valid, y: Y_valid})
-            acc_valid = sess.run(accuracy, feed_dict={x: X_valid, y: Y_valid})
-            print("After {} epochs:".format(epoch))
-            print("\tTraining Cost: {}".format(cost_train))
-            print("\tTraining Accuracy: {}".format(acc_train))
-            print("\tValidation Cost: {}".format(cost_valid))
-            print("\tValidation Accuracy: {}".format(acc_valid))
-            if epoch < epochs:
-                for X_mini, Y_mini in mini_batches:
-                    sess.run(train_op, feed_dict={x: X_mini, y: Y_mini})
-                    cost_train = sess.run(
-                        loss, feed_dict={x: X_train, y: Y_train})
-                    acc_train = sess.run(accuracy, feed_dict={
-                                         x: X_train, y: Y_train})
-                    cost_valid = sess.run(
-                        loss, feed_dict={x: X_valid, y: Y_valid})
-                    acc_valid = sess.run(accuracy, feed_dict={
-                                         x: X_valid, y: Y_valid})
-                    print("\tTraining Cost: {}".format(cost_train))
-                    print("\tTraining Accuracy: {}".format(acc_train))
-                    print("\tValidation Cost: {}".format(cost_valid))
-                    print("\tValidation Accuracy: {}".format(acc_valid))
-        # save the model
-        save_path = saver.save(sess, save_path)
-
-    return save_path
+    return saved_path
