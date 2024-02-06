@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 """This module contains the function that
-builds, trains, and saves a neural network model in tensorflow 
-using Adam optimization, mini-batch gradient descent, 
+builds, trains, and saves a neural network model in tensorflow
+using Adam optimization, mini-batch gradient descent,
 learning rate decay, and batch normalization:
 """
 
@@ -15,20 +15,20 @@ def model(Data_train, Data_valid, layers, activations,
           alpha=0.001, beta1=0.9, beta2=0.999, epsilon=1e-8, 
           decay_rate=1, batch_size=32, epochs=5, save_path='/tmp/model.ckpt'):
     """
-    builds, trains, and saves a neural network model in tensorflow 
-    using Adam optimization, mini-batch gradient descent, 
+    builds, trains, and saves a neural network model in tensorflow
+    using Adam optimization, mini-batch gradient descent,
     learning rate decay, and batch normalization
-    Data_train - is a tuple containing the training inputs and training labels, respectively
-    Data_valid - is a tuple containing the validation inputs and validation labels, respectively
-    layers - is a list containing the number of nodes in each layer of the network
-    activations - is a list containing the activation functions for each layer of the network
+    Data_train - tuple with training inputs and training labels, respectively
+    Data_valid - tuple with validation inputs and validation labels, respectively
+    layers - is a list with the no. of nodes in each layer of the network
+    activations - list with the activation functions for each layer of the network
     alpha - is the learning rate
     beta1 - is the weight used for the first moment
     beta2 - is the weight used for the second moment
     epsilon - is a small number to avoid division by zero
     decay_rate - is the decay rate for inverse time decay of the learning rate
     batch_size - is the number of data points in a batch
-    epochs - is the number of times the training should pass through the whole dataset
+    epochs - no. of times the training should pass through the whole dataset
     save_path - is the path where the model should be saved to
     Returns: the path where the model was saved
     """
@@ -60,14 +60,13 @@ def model(Data_train, Data_valid, layers, activations,
     # Create the accuracy calculation operation
     correct_prediction = tf.equal(tf.argmax(y, 1), tf.argmax(A, 1))
     accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float 32))
-    
     # Create the saver
     saver = tf.train.Saver()
-    
+
     # Create the session
     session = tf.Session()
-    session.run(tf.global_variables_initializer())  
-    
+    session.run(tf.global_variables_initializer())
+
     # Calculate the number of batches for training and validation
     m = X_train.shape[0]
     num_batches = m // batch_size if m % batch_size == 0 else (m // batch_size) + 1
