@@ -86,15 +86,15 @@ def model(Data_train, Data_valid, layers, activations,
             session.run(train_op, feed_dict={x: X_mini, y: Y_mini})
             if i % 100 == 0 and i != 0:
                 loss_train = session.run(loss,
-                            feed_dict={x: X_mini, y: Y_mini})
-                accuracy_train = session.run(accuracy, 
                                 feed_dict={x: X_mini, y: Y_mini})
+                accuracy_train = session.run(accuracy, 
+                                    feed_dict={x: X_mini, y: Y_mini})
                 print("After {} batches: ".format(i))
                 print("\tTraining Cost: {}".format(loss_train))
                 print("\tTraining Accuracy: {}".format(accuracy_train))
         loss_valid = session.run(loss, feed_dict={x: X_valid, y: Y_valid})
         accuracy_valid = session.run(accuracy,
-                                feed_dict={x: X_valid, y: Y_valid})
+                                    feed_dict={x: X_valid, y: Y_valid})
         print("After {} epochs: ".format(epoch))
         print("\tTraining Cost: {}".format(loss_train))
         print("\tTraining Accuracy: {}".format(accuracy_train))
