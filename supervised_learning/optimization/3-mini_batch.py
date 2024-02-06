@@ -9,8 +9,10 @@ import tensorflow as tf
 shuffle_data = __import__('2-shuffle_data').shuffle_data
 
 
-def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32, epochs=5,
-                     load_path="/tmp/model.ckpt", save_path="/tmp/model.ckpt"):
+def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32,
+                     epochs=5,
+                     load_path="/tmp/model.ckpt",
+                     save_path="/tmp/model.ckpt"):
     """
     trains a loaded neural network model using mini-batch gradient descent
     X_train - is a numpy.ndarray of shape (m, 784) containing the training data
@@ -65,11 +67,11 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32, epochs=5
         cost_valid, acc_valid = session.run(
             [loss, accuracy], feed_dict={x: X_valid, y: Y_valid})
 
-        print(f"After epoch {epoch + 1}/{epochs}:")
-        print(f"\tTraining Cost: {cost_train}")
-        print(f"\tTraining Accuracy: {acc_train}")
-        print(f"\tValidation Cost: {cost_valid}")
-        print(f"\tValidation Accuracy: {acc_valid}")
+    print("After epoch {}/{}:".format(epoch + 1, epochs))
+    print("\tTraining Cost: {}".format(cost_train))
+    print("\tTraining Accuracy: {}".format(acc_train))
+    print("\tValidation Cost: {}".format(cost_valid))
+    print("\tValidation Accuracy: {}".format(acc_valid))
 
     # Save the model
     saved_path = saver.save(session, save_path)
