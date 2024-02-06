@@ -37,72 +37,61 @@ def model(Data_train, Data_valid, layers, activations,
     X_train, Y_train = Data_train
     X_valid, Y_valid = Data_valid
 
-    # Create placeholders
-    x = tf.placeholder(tf.float32, shape=(None, X_train.shape[1]), name='x')
-    y = tf.placeholder(tf.float32, shape=(None, Y_train.shape[1]), name='y')
+    # Placeholder creation
+    x = tf.placeholder(tf.float32, [None, X_train.shape[1]], name='x')
+    y = tf.placeholder(tf.float32, [None, Y_train.shape[1]], name='y')
 
-    # Create the neural network
-    A = create_layer(x, layers[0], activations[0])
-    for i in range(1, len(layers)):
-        A = create_batch_norm_layer(A, layers[i], activations[i])
+    # Initial layer setup
+    A = x
+    for i, n_units in enumerate(layers):
+        with tf.variable_scope(f'layer{i}'):
+            weights = tf.get_variable('weights', [A.get_shape().as_list()[1], n_units],
+                                      initializer=tf.contrib.layers.variance_scaling_initializer())
+            biases = tf.get_variable(
+                'biases', [n_units], initializer=tf.constant_initializer(0.0))
+            Z = tf.add(tf.matmul(A, weights), biases)
 
-    # Create the loss function
-    loss = tf.losses.softmax_cross_entropy(y, A)
+            if i < len(layers) - 1:  # Apply batch normalization to hidden layers
+                Z = tf.layers.batch_normalization(Z, training=True)
 
-    # Create the learning rate decay operation
+            A = activations[i](Z)
+
+    # Loss, optimizer, and training operations
+    loss = tf.reduce_mean(
+        tf.nn.softmax_cross_entropy_with_logits_v2(logits=A, labels=y))
     global_step = tf.Variable(0, trainable=False)
-    alpha = tf.train.inverse_time_decay(alpha,
-            global_step, decay_rate, 1, staircase=True)
+    learning_rate = tf.train.inverse_time_decay(
+        alpha, global_step, decay_rate, 1, staircase=True)
+    optimizer = tf.train.AdamOptimizer(
+        learning_rate, beta1, beta2, epsilon).minimize(loss, global_step=global_step)
 
-    # Create the Adam optimization operation
-    optimizer = tf.train.AdamOptimizer(alpha, beta1, beta2, epsilon)
-    train_op = optimizer.minimize(loss, global_step=global_step)
+    # Accuracy calculation
+    correct_pred = tf.equal(tf.argmax(A, 1), tf.argmax(y, 1))
+    accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32))
 
-    # Create the accuracy calculation operation
-    correct_prediction = tf.equal(tf.argmax(y, 1), tf.argmax(A, 1))
-    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float 32))
-    # Create the saver
+    # Saver and session initialization
     saver = tf.train.Saver()
+    init = tf.global_variables_initializer()
 
-    # Create the session
-    session = tf.Session()
-    session.run(tf.global_variables_initializer())
+    with tf.Session() as sess:
+        sess.run(init)
 
-    # Calculate the number of batches for training and validation
-    m = X_train.shape[0]
-    num_batches = m // batch_size if m % batch_size == 0 else (m // batch_size) + 1
-    m_valid = X_valid.shape[0]
-    num_batches_valid = m_valid // batch_size if m_valid % batch_size == 0 else (m_valid // batch_size) + 1
+        for epoch in range(epochs):
+            X_shuffled, Y_shuffled = shuffle_data(
+                X_train, Y_train)  # Assuming shuffle_data is defined
+            for batch in range(0, len(X_train), batch_size):
+                X_batch = X_shuffled[batch:batch + batch_size]
+                Y_batch = Y_shuffled[batch:batch + batch_size]
+                sess.run(optimizer, feed_dict={x: X_batch, y: Y_batch})
 
-    # Training loop
-    for epoch in range(epochs):
-        # Shuffle data at the start of each epoch
-        X_train, Y_train = shuffle_data(X_train, Y_train)
-        for i in range(num_batches):
-            start_i = i * batch_size
-            end_i = start_i + batch_size
-            X_mini = X_train[start_i:end_i]
-            Y_mini = Y_train[start_i:end_i]
-            session.run(train_op, feed_dict={x: X_mini, y: Y_mini})
-            if i % 100 == 0 and i != 0:
-                loss_train = session.run(loss,
-                                feed_dict={x: X_mini, y: Y_mini})
-                accuracy_train = session.run(accuracy, 
-                                    feed_dict={x: X_mini, y: Y_mini})
-                print("After {} batches: ".format(i))
-                print("\tTraining Cost: {}".format(loss_train))
-                print("\tTraining Accuracy: {}".format(accuracy_train))
-        loss_valid = session.run(loss, feed_dict={x: X_valid, y: Y_valid})
-        accuracy_valid = session.run(accuracy,
-                                    feed_dict={x: X_valid, y: Y_valid})
-        print("After {} epochs: ".format(epoch))
-        print("\tTraining Cost: {}".format(loss_train))
-        print("\tTraining Accuracy: {}".format(accuracy_train))
-        print("\tValidation Cost: {}".format(loss_valid))
-        print("\tValidation Accuracy: {}".format(accuracy_valid))
+            # Epoch completion log
+            train_loss, train_acc = sess.run(
+                [loss, accuracy], feed_dict={x: X_train, y: Y_train})
+            valid_loss, valid_acc = sess.run(
+                [loss, accuracy], feed_dict={x: X_valid, y: Y_valid})
+            print(f'Epoch {epoch + 1}, Train Loss: {train_loss}, Train Accuracy: {train_acc}, Validation Loss: {valid_loss}, Validation Accuracy: {valid_acc}')
 
-    # Save the model
-    saved_path = saver.save(session, save_path)
-    session.close()
+        # Save the model
+        save_path = saver.save(sess, save_path)
 
-    return saved_path
+    return save_path
