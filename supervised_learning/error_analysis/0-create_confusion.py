@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-import numpy as np
 
 """
 This module conatains a function that
 creates a confusion matrix"""
+
+import numpy as np
 
 
 def create_confusion_matrix(labels, logits):
