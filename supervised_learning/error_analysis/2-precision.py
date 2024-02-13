@@ -6,6 +6,7 @@ each class in a confusion matrix"""
 
 import numpy as np
 
+
 def precision(confusion):
     """calculte precision
     confusion - (classes, classes) confusion matrix
