@@ -15,7 +15,8 @@ def specificity(confusion):
     specificity = np.zeros(classes)  # create an array of zeros
     for i in range(classes):
         true_negatives = np.sum(
-            confusion) - np.sum(confusion[i]) - np.sum(confusion[:, i]) + confusion[i, i]
+            confusion) - np.sum(confusion[i]) - np.sum(confusion[:,
+                                                    i]) + confusion[i, i]
         false_positives = np.sum(confusion[:, i]) - confusion[i, i]
         false_negatives = np.sum(confusion[i]) - confusion[i, i]
         true_positives = confusion[i, i]
