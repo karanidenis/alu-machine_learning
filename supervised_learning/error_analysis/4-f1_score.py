@@ -13,10 +13,6 @@ def f1_score(confusion):
     """
     confusion - (classes, classes) confusion matrix
     """
-    # precisions = precision(confusion)
-    # sensitivitys = sensitivity(confusion)
-    # f1 = 2(precision * sensitivity) / (precision + sensitivity)
-    # return f1
     classes = confusion.shape[0]
     f1 = np.zeros(classes)
     precisions = precision(confusion)

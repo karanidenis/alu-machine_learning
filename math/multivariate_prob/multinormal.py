@@ -60,9 +60,5 @@ class MultiNormal:
         # exponent = -0.5 * np.dot(np.dot(x_m.T, cov_inv), x_m)
         exponent = -0.5 * np.matmul(np.matmul(x_m.T, cov_inv), x_m)
         pdf = prefactor * np.exp(exponent)
-
-        # first = 1 / np.sqrt(((2 * np.pi) ** d) * det)
-        # second = np.exp(-(np.matmul(np.matmul(x_m.T, cov_inv), x_m)) / 2)
-        # pdf = first * second
         # print(pdf)
         return pdf[0][0]
