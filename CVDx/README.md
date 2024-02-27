@@ -67,9 +67,7 @@ The model is trained with the Adam optimizer and binary crossentropy loss functi
 The model is used to make predictions on the test data and the predictions are evaluated using the classification report and confusion matrix.
 
 ### Model Summary
-The model summary is printed and the model architecture is visualized.
-
-Provides a thorough and detailed discussion of various optimization techniques used, including clear explanations of underlying principles and their relevance to the project. Clearly explains the parameters associated with each optimization technique and their significance in the context of the project. Provides detailed information on how parameter values were selected or tuned, with justification for the chosen settings.
+The model summary is printed.
 
 ## Why the Optimized Model should be Better
 Using L2 regularization, the model is able to generalize better and reduce overfitting by penalizing the weights in the model. L2 is best when we have a large number of features. L1 regularization is used to reduce the number of features in the model. It is used to reduce overfitting and improve the model's performance. Our model is able to generalize better and reduce overfitting by using L2 regularization. 
