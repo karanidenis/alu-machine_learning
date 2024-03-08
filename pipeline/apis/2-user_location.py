@@ -30,7 +30,8 @@ def print_location():
             print("Not found")
     elif response.status_code == 403:
         print("Reset in {} min".format(
-            (int(response.headers['X-Ratelimit-Reset']) - int(response.headers['X-Ratelimit-Reset'])) / 60))
+            (int(response.headers['X-Ratelimit-Reset']) -
+             int(response.headers['X-Ratelimit-Reset'])) / 60))
     else:
         print("Not found")
 
