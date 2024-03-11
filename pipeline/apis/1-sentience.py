@@ -24,4 +24,5 @@ def sentientPlanets():
             planet = requests.get(result['homeworld'])
             species.append(planet.json()['name'])
             # species.append(result['name'])
+    response = requests.get(data['next'])
     return species
