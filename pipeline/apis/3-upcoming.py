@@ -20,12 +20,24 @@ def upcomingLaunch():
     url = "https://api.spacexdata.com/v4/launches/upcoming"
     response = requests.get(url)
     data = response.json()
-    launch = data[0]
-    rocket_id = launch['rocket']
-    launchpad_id = launch['launchpad']
-    rocket_url = "https://api.spacexdata.com/v4/rockets/{}".format(rocket_id)
+    recent = 0
+
+    for dic in data:
+        new = int(dic["date_unix"])
+        if recent == 0 or new < recent:
+            recent = new
+            launch_name = dic["name"]
+            date = dic["date_local"]
+            rocket_number = dic["rocket"]
+            launch_number = dic["launchpad"]
+
+    # launch = data[0]
+    # rocket_id = launch['rocket']
+    # launchpad_id = launch['launchpad']
+    rocket_url = "https://api.spacexdata.com/v4/rockets/{}".format(
+        rocket_number)
     launchpad_url = "https://api.spacexdata.com/v4/launchpads/{}".format(
-        launchpad_id)
+        launch_number)
     rocket_response = requests.get(rocket_url)
     launchpad_response = requests.get(launchpad_url)
     rocket_data = rocket_response.json()
@@ -34,8 +46,8 @@ def upcomingLaunch():
     launchpad_name = launchpad_data['name']
     launchpad_locality = launchpad_data['locality']
     print("{} ({}) {} - {} ({})".format(
-        launch['name'],
-        launch['date_local'],
+        launch_name,
+        date,
         rocket_name,
         launchpad_name,
         launchpad_locality
