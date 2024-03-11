@@ -15,24 +15,24 @@ def availableShips(passengerCount):
     data = response.json()
     ships = []
     # print(data["results"])
-    # for result in data['results']:
-    #     if result['passengers'] != "n/a":
-    #         passengers_no = int(result['passengers'].replace(',', ''))
-    #         # print(passengers_no)
-    #         if passengers_no == passengerCount:
-    #             ships.append(result['name'])
-    while response.status_code == 200:
-        # res = res.json()
-        for ship in data['results']:
-            passengers = ship['passengers'].replace(',', '')
-            try:
-                if int(passengers) >= passengerCount:
-                    ships.append(ship['name'])
-            except ValueError:
-                pass
-        try:
-            data = requests.get(data['next'])
-        except Exception:
-            break
+    for result in data['results']:
+        if result['passengers'] != "n/a":
+            passengers_no = int(result['passengers'].replace(',', ''))
+            # print(passengers_no)
+            if passengers_no >= passengerCount:
+                ships.append(result['name'])
+    # while response.status_code == 200:
+    #     # res = res.json()
+    #     for ship in data['results']:
+    #         passengers = ship['passengers'].replace(',', '')
+    #         try:
+    #             if int(passengers) >= passengerCount:
+    #                 ships.append(ship['name'])
+    #         except ValueError:
+    #             pass
+    #     try:
+    #         data = requests.get(data['next'])
+    #     except Exception:
+    #         break
 
     return ships
