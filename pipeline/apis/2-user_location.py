@@ -25,7 +25,7 @@ def print_location():
     data = response.json()
 
     if response.status_code == 403:
-        rate_limit = int(res.headers.get('X-Ratelimit-Reset'))
+        rate_limit = int(response.headers.get('X-Ratelimit-Reset'))
         current_time = int(time.time())
         diff = (rate_limit - current_time) // 60
         print("Reset in {} min".format(diff))
