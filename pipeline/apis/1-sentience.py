@@ -24,7 +24,7 @@ def sentientPlanets():
                 name = planets.json()['name']
                 species.append(name)
         try:
-            response = requests.get(response.json()["next"])
+            data = requests.get(response.json()["next"])
         except Exception:
             break
     return species
