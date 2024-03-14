@@ -1,2 +1,2 @@
-$comment: "list databases in Mongodb"
+//  list databases in Mongodb
 db.adminCommand( { listDatabases: 1} )
