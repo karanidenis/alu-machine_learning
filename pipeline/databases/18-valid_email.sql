@@ -11,6 +11,7 @@ BEGIN
 END;
 //
 DELIMITER ;
+
  
 --  This time, we have to create a trigger that will reset the  valid_email  column to  0  if the  email  column is updated. 
 --  The trigger is called  reset_valid_email  and is created on the  users  table. It is a  BEFORE UPDATE  trigger, which means that it will be executed before the update is performed. 
