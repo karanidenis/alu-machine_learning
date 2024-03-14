@@ -15,8 +15,9 @@
 -- format : band_name - lifespan (formed - split)-
 
 SELECT 
-    band_name, (2020 - formed) AS lifespan
+    band_name, IFNULL(split, 2020) - formed AS lifespan
 FROM
     metal_bands
 WHERE
-    style = 'Glam rock';
+    style LIKE '%Glam rock%'
+ORDER BY lifespan DESC;
