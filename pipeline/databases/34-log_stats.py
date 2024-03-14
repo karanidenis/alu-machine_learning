@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+"""
+this module contains the function count_logs"""
 
 from pymongo import MongoClient
 
