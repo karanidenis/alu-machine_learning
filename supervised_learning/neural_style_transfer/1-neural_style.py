@@ -80,12 +80,14 @@ class NST:
     def load_model(self):
         """creates the model used to calculate cost
         model should output the style and content layers"""
-        base_model = tf.keras.applications.VGG19(include_top=False, weights='imagenet')
-        vgg19_base_model = base_model.save('base_model')
+        base_model = tf.keras.applications.VGG19(include_top=False,
+                                                 weights='imagenet')
+        base_model.save("vgg19_base_model")
 
         objects = {'MaxPooling2D': tf.keras.layers.AveragePooling2D}
 
-        vgg19 = tf.keras.models.load_model(vgg19_base_model, custom_objects=objects)
+        vgg19 = tf.keras.models.load_model('vgg19_base_model',
+                                           custom_objects=objects)
 
         for layers in vgg19.layers:
             layers.trainable = False
@@ -96,6 +98,5 @@ class NST:
 
         model_outputs = style_outputs + [content_outputs]
 
-        model = tf.keras.models.Model(vgg19_base_model.input, model_outputs)
+        model = tf.keras.models.Model(vgg19.input, model_outputs)
         self.model = model
-        return model
