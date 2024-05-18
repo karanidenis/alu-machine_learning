@@ -47,8 +47,8 @@ class NST:
         self.content_image = self.scale_image(content_image)
         self.alpha = alpha
         self.beta = beta
-        # define a model
-        model = tf.keras.applications.vgg19.VGG19(include_top=False)
+        # load model
+        self.load_model()
 
     @staticmethod
     def scale_image(image):
@@ -80,11 +80,22 @@ class NST:
     def load_model(self):
         """creates the model used to calculate cost
         model should output the style and content layers"""
-        base_model = tf.keras.applications.vgg19.VGG19(include_top=False)
-        base_model.trainable = False
-        style_outputs = [base_model.get_layer(name).output
-                         for name in self.style_layers]
-        content_outputs = base_model.get_layer(self.content_layer).output
+        base_model = tf.keras.applications.VGG19(include_top=False, weights='imagenet')
+        vgg19_base_model = base_model.save('base_model')
+
+        objects = {'MaxPooling2D': tf.keras.layers.AveragePooling2D}
+
+        vgg19 = tf.keras.models.load_model(vgg19_base_model, custom_objects=objects)
+
+        for layers in vgg19.layers:
+            layers.trainable = False
+
+        style_outputs = [vgg19.get_layer(layer).output
+                         for layer in self.style_layers]
+        content_outputs = vgg19.get_layer(self.content_layer).output
+
         model_outputs = style_outputs + [content_outputs]
-        model = tf.keras.models.Model(base_model.input, model_outputs)
+
+        model = tf.keras.models.Model(vgg19_base_model.input, model_outputs)
+        self.model = model
         return model
