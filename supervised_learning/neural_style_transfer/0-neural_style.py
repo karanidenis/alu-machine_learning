@@ -35,31 +35,31 @@ class NST:
             raise TypeError(error)
         if content_image.ndim != 3 or content_image.shape[2] != 3:
             raise TypeError(error)
-                
+
         if not isinstance(alpha, (int, float)) or alpha < 0:
             raise TypeError("alpha must be a non-negative number")
-        
+
         if not isinstance(beta, (int, float)) or beta < 0:
             raise TypeError("beta must be a non-negative number")
 
-        
         self.style_image = self.scale_image(style_image)
         self.content_image = self.scale_image(content_image)
         self.alpha = alpha
         self.beta = beta
-        
+
     @staticmethod
     def scale_image(image):
         """rescales an image such that its pixels values are between 0 and 1
         and its largest side is 512 pixels
-        image - numpy.ndarray of shape (h, w, 3) containing the image to be scaled
-        Returns a scaled image with shape (h, w, 3) where max(h, w) is 512 pixels
+        image - numpy.ndarray of shape (h, w, 3) with image to be scaled
+        Returns a scaled image with shape (h, w, 3) - max(h, w) is 512 pixels
         """
+        err = "image must be a numpy.ndarray with shape (h, w, 3)"
         if not isinstance(image, np.ndarray):
-            raise TypeError("image must be a numpy.ndarray with shape (h, w, 3)")
+            raise TypeError(err)
         if image.ndim != 3 or image.shape[2] != 3:
-            raise TypeError("image must be a numpy.ndarray with shape (h, w, 3)")
-        
+            raise TypeError(err)
+
         h, w, _ = image.shape
         if h > w:
             h_new = 512
@@ -67,7 +67,7 @@ class NST:
         else:
             w_new = 512
             h_new = int(h * w_new / w)
-        
+
         image = image[tf.newaxis, ...]
         image = tf.image.resize_bicubic(image, (h_new, w_new))
         image = image / 255
