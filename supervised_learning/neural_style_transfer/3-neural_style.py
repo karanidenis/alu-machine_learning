@@ -123,7 +123,7 @@ class NST:
         gram = tf.expand_dims(gram, axis=0)
         gram /= tf.cast(n, tf.float32)
         return (gram)
-    
+
     def generate_features(self):
         """
         extracts the features used to calculate neural style cost
