@@ -49,6 +49,7 @@ class NST:
         self.beta = beta
         # load model
         self.load_model()
+        self.generate_features()
 
     @staticmethod
     def scale_image(image):
@@ -102,6 +103,7 @@ class NST:
         self.model = model
         # return model
 
+    @staticmethod
     def gram_matrix(input_layer):
         """
         input_layer - has layer output whose gram matrix
