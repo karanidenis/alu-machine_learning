@@ -121,7 +121,7 @@ class NST:
         gram = tf.expand_dims(gram, axis=0)
         gram /= tf.cast(n, tf.float32)
         return (gram)
-    
+
     def generate_features(self):
         """
         extracts the features used to calculate neural style cost
@@ -147,7 +147,7 @@ class NST:
 
     def layer_style_cost(self, style_output, gram_target):
         """calculate style cost for single layer"""
-        
+
         c = style_output.shape[-1]
         err_1 = "style_output must be a tensor of rank 4"
         if not isinstance(style_output, (tf.Tensor, tf.Variable)):
@@ -160,11 +160,10 @@ class NST:
             raise TypeError(err_2)
         if gram_target.shape != (1, c, c):
             raise TypeError(err_2)
-        
+
         # Compute the gram matrix of the style_output layer
         gram_style = self.gram_matrix(style_output)
         # Calculate the mean squared error between gram_style and gram_target
         style_cost = tf.reduce_mean(tf.square(gram_style - gram_target))
-        
+
         return style_cost
-    
