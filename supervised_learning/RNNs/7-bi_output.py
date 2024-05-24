@@ -59,6 +59,6 @@ class BidirectionalCell:
         y_lin= np.dot(H, self.Wy) + self.by
 
         # output with softmax activation
-        Y = np.exp(y_lin) / np.sum(np.exp(y_lin), axis=1, keepdims=True)
+        Y = np.exp(y_lin) / np.sum(np.exp(y_lin), axis=-1, keepdims=True)
 
         return Y
