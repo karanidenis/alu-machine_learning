@@ -8,7 +8,7 @@ import numpy as np
 
 def bi_rnn(bi_cells, X, h_0, h_t):
     """forward propagation for bi rnn
-    bi_cells - instance of BidirectionalCell 
+    bi_cells - instance of BidirectionalCell
     X - data used of shape(t, m, i)
         t - time steps
         m - batch size
