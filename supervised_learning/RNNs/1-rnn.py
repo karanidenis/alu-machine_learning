@@ -3,7 +3,6 @@
 """
 This module contains class RNNCell which represents
 a cell of a simple RNN"""
-RNNCell = __import__('0-rnn_cell').RNNCell
 import numpy as np
 
 def rnn(rnn_cell, X, h_0):
