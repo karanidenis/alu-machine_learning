@@ -58,7 +58,7 @@ class GRUCell:
         y = np.exp(y_lin) / np.sum(np.exp(y_lin), axis=1, keepdims=True)
 
         return h_next, y
-    
+
     def sigmoid(self, x):
         """Compute the sigmoid function."""
         return 1 / (1 + np.exp(-x))
