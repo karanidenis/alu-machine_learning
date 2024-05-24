@@ -38,8 +38,8 @@ class RNNCell:
 
         # cell output
         y_lin = np.dot(h_next, self.Wy) + self.by
-        
+
         # output with softmax activation
         y = np.exp(y_lin) / np.sum(np.exp(y_lin), axis=1, keepdims=True)
- 
+
         return h_next, y
