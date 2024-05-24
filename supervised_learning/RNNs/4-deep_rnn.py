@@ -22,7 +22,7 @@ def deep_rnn(rnn_cells, X, h_0):
 
     t, m, i = X.shape
     l, _, h = h_0.shape
-    
+
     # Initialize the hidden states container
     H = np.zeros((t + 1, l, m, h))
 
