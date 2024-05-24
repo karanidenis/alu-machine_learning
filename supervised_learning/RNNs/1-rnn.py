@@ -5,6 +5,7 @@ This module contains class RNNCell which represents
 a cell of a simple RNN"""
 import numpy as np
 
+
 def rnn(rnn_cell, X, h_0):
     """forward propagation for a simple RNN
     rnn_cell = instance of a RNNCell
@@ -23,9 +24,9 @@ def rnn(rnn_cell, X, h_0):
     o = rnn_cell.Wy.shape[1]
 
     # initialize hidden state
-    H = np.zeros((t+1, m , h))
+    H = np.zeros((t+1, m, h))
 
-    # initialize output 
+    # initialize output
     Y = np.zeros((t, m, o))
 
     # initial hidden state
