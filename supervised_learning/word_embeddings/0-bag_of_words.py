@@ -5,6 +5,7 @@ creates a bag of words embedding matrix"""
 # from sklearn.feature_extraction.text import CountVectorizer
 import numpy as np
 from collections import Counter
+import re
 
 
 def bag_of_words(sentences, vocab=None):
@@ -28,7 +29,8 @@ def bag_of_words(sentences, vocab=None):
     tokenized_sentences = []
     # Tokenize sentences
     for sentence in sentences:
-        tokenized_sentences.append(sentence.lower().split())
+        tokenized_sentences.append(re.findall(r'\b\w+\b',
+                                              sentence.lower()))
     print(tokenized_sentences)
 
     # if vobab is not provided
