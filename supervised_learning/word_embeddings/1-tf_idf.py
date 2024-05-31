@@ -13,11 +13,11 @@ def compute_idf(sentences):
     N = len(sentences)
     idf = {}
     all_words = set(word for doc in sentences for word in doc)
-    
+
     for word in all_words:
         containing_docs = sum(1 for doc in sentences if word in doc)
         idf[word] = math.log(N / (1 + containing_docs))
-    
+
     return idf
 
 
@@ -39,14 +39,14 @@ def tf_idf(sentences, vocab=None):
         f-mo. of features analyzed
     features - list of features for embeddings
     """
-    
+
     # tokenize sentences
     tokenized_sentences = []
     for sentence in sentences:
         tokenized_sentences.append(re.findall(r'\b\w+\b',
                                               sentence.lower()))
     # print(tokenized_sentences)
-    
+
     # if vocab is not provided
     if vocab is None:
         vocab_set = set()
