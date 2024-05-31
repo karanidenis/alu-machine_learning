@@ -8,6 +8,19 @@ from collections import Counter
 import re
 
 
+def normalize_word(word):
+    """Normalize words by removing possessives and punctuation"""
+    # Remove possessive 's at the end of words
+    word = re.sub(r"'s$", "", word)
+    # Remove possessive 's at the end of words for plurals ending with s
+    word = re.sub(r"s'$", "s", word)
+    # Remove standalone 's
+    word = re.sub(r"\b[sS]\b", "", word)
+    # Remove punctuation from the start and end of the word
+    word = re.sub(r"^\W+|\W+$", "", word)
+    return word
+
+
 def bag_of_words(sentences, vocab=None):
     """creates a bag of words embedding matrix
     sentence - list of sentences to analyze
@@ -29,8 +42,11 @@ def bag_of_words(sentences, vocab=None):
     tokenized_sentences = []
     # Tokenize sentences
     for sentence in sentences:
-        tokenized_sentences.append(re.findall(r'\b\w+\b',
-                                              sentence.lower()))
+        tokenized_sentence = [normalize_word(word) for word in re.findall(r'\b\w+\b', sentence.lower())]
+        tokenized_sentences.append(tokenized_sentence)
+        # tokenized_sentences.append(re.findall(r'\b\w+\b',
+                                            #   sentence.lower()))
+    # print(tokenized_sentences)
 
     # if vobab is not provided
     if vocab is None:
