@@ -29,6 +29,7 @@ def bag_of_words(sentences, vocab=None):
     # Tokenize sentences
     for sentence in sentences:
         tokenized_sentences.append(sentence.lower().split())
+    print(tokenized_sentences)
 
     # if vobab is not provided
     if vocab is None:
