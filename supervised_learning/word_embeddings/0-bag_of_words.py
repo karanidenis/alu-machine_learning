@@ -42,10 +42,8 @@ def bag_of_words(sentences, vocab=None):
     tokenized_sentences = []
     # Tokenize sentences
     for sentence in sentences:
-        tokenized_sentence = [normalize_word(word) for word in re.findall(r'\b\w+\b', sentence.lower())]
-        tokenized_sentences.append(tokenized_sentence)
-        # tokenized_sentences.append(re.findall(r'\b\w+\b',
-                                            #   sentence.lower()))
+        tokenized_sentences.append(re.findall(r'\b\w+\b',
+                                              sentence.lower()))
     # print(tokenized_sentences)
 
     # if vobab is not provided
