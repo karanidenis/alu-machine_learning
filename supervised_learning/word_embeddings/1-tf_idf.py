@@ -51,7 +51,8 @@ def tf_idf(sentences, vocab=None):
     if vocab is None:
         vocab_set = set()
         for sentence in tokenized_sentences:
-            vocab_set.add(word for word in sentence)
+            for word in sentence:
+                vocab_set.add(word)
         vocab = sorted(vocab_set)
 
     # word index dict for vocabs
