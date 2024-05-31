@@ -4,6 +4,7 @@
 creates a bag of words embedding matrix"""
 from sklearn.feature_extraction.text import CountVectorizer
 
+
 def bag_of_words(sentences, vocab=None):
     """creates a bag of words embedding matrix
     sentence - list of sentences to analyze
@@ -17,10 +18,11 @@ def bag_of_words(sentences, vocab=None):
     # Initialize the CountVectorizer
     vectorizer = CountVectorizer(vocabulary=vocab)
 
-    # Fit the vectorizer on the documents and transform the documents into the BoW matrix
+    # Fit the vectorizer on the documents and
+    # transform the documents into the BoW matrix
     embedding_matrix = vectorizer.fit_transform(sentences).toarray()
 
     # Get the feature names (words) from the vectorizer
     feature_names = vectorizer.get_feature_names_out()
-    
+
     return embedding_matrix, feature_names
