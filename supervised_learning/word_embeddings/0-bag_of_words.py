@@ -19,18 +19,18 @@ def bag_of_words(sentences, vocab=None):
     """
     # Initialize the CountVectorizer
     # vectorizer = CountVectorizer(vocabulary=vocab)
-     # Fit the vectorizer on the documents and
+    # Fit the vectorizer on the documents and
     # transform the documents into the BoW matrix
     # embedding_matrix = vectorizer.fit_transform(sentences).toarray()
     # Get the feature names (words) from the vectorizer
     # feature_names = vectorizer.get_feature_names_out()
-    
+
     tokenized_sentences = []
     # Tokenize sentences
     for sentence in sentences:
         tokenized_sentences.append(sentence.lower().split())
 
-    # for word in sentence:
+    # if vobab is not provided
     if vocab is None:
         vocab_set = set()
         for sentence in tokenized_sentences:
@@ -52,5 +52,5 @@ def bag_of_words(sentences, vocab=None):
         word_counts = Counter(sentence)
         for word, count in word_counts.items():
             if word in word_index:
-                embeddings[i, word_index[word]] =  count
+                embeddings[i, word_index[word]] = count
     return embeddings, vocab
