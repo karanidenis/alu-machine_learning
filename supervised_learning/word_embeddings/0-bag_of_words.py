@@ -31,7 +31,6 @@ def bag_of_words(sentences, vocab=None):
     for sentence in sentences:
         tokenized_sentences.append(re.findall(r'\b\w+\b',
                                               sentence.lower()))
-    print(tokenized_sentences)
 
     # if vobab is not provided
     if vocab is None:
