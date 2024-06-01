@@ -15,7 +15,7 @@ def uni_bleu(references, sentence):
     # print(sentence_tokens)
     ref_tokens_list = references
     # print(ref_tokens_list)
-    
+
     word_count = len(sentence_tokens)
     # print(f"sentence unigram is {word_count}")
 
@@ -24,7 +24,7 @@ def uni_bleu(references, sentence):
 
     closest_ref_count = ref_lengths[0]
     min_diff = abs(ref_lengths[0] - word_count)
-    
+
     for ref_length in ref_lengths:
         diff = abs(ref_length - word_count)
         if diff < min_diff:
@@ -46,7 +46,8 @@ def uni_bleu(references, sentence):
     # print(sentence_unigram_counts)
 
     for token, count in sentence_unigram_counts.items():
-        max_ref_count = max([ref_tokens.count(token) for ref_tokens in ref_tokens_list])
+        for ref_tokens in ref_tokens_list:
+            max_ref_count = max([ref_tokens.count(token)])
         clipped_counts += min(count, max_ref_count)
 
     # precision
