@@ -13,40 +13,32 @@ def ngram_bleu(references, sentence, n):
     n - size of n-gram for evaluation
     """
 
-    # for i in range(len(sentence) - n + 1):
-    word_ngrams = Counter([tuple(sentence[i:i+n]) for i in range(len(sentence) - n + 1)])
-    print(f"sentence n-gram is {word_ngrams}")
-
-    # Find the n-gram for refs
-    ref_ngrams = [Counter([tuple(ref[i:i+n]) for i in range(len(ref) - n + 1)]) for ref in references]
-    print(f"ref n-gram {ref_ngrams}")
-
-    sentence_count = sum(word_ngrams.values())
-    print(sentence_count)
-
-     # Calculate lengths of all reference translations
+    # Generate n-grams for the sentence
+    sentence_ngrams = Counter(tuple(sentence[i:i+n]) for i in range(len(sentence) - n + 1))
+    
+    # Generate n-grams for the references
+    reference_ngrams = [Counter(tuple(ref[i:i+n]) for i in range(len(ref) - n + 1)) for ref in references]
+    
+    # Count the total number of n-grams in the sentence
+    sentence_count = sum(sentence_ngrams.values())
+    
+    # Find the reference length that is closest to the sentence length
     ref_lengths = [len(ref) for ref in references]
-    print(f"all ref translations length is {ref_lengths}")
-
-    # Find the reference length that is closest to the candidate length
-    closest_ref_count = min(ref_lengths, key=lambda ref_len: (abs(ref_len - sentence_count), ref_len))
-    print(f"ref closest length is {closest_ref_count}")
-
-    # Count clipped n-grams
-    clipped_counts = 0
-    for ngram, count in word_ngrams.items():
-        max_ref_count = max(ref_ngram_counts.get(ngram, 0) for ref_ngram_counts in ref_ngrams)
-        clipped_counts += min(count, max_ref_count)
-    print(f"clipped count is {clipped_counts}")
-
-    # precision
-    precision = clipped_counts / sentence_count if sentence_count > 0 else 0
-    print(f"precision is {precision}")
-
-    # berivity penalty
-    brevity_penalty = min(1.0, sentence_count / closest_ref_count) if closest_ref_count > 0 else 0
-    print(f"brevity is {brevity_penalty}")
-
-    # bleu score
+    closest_ref_count = min(ref_lengths, key=lambda ref_len: (abs(ref_len - len(sentence)), ref_len))
+    
+    # Count the clipped n-grams
+    clipped_count = 0
+    for ngram, count in sentence_ngrams.items():
+        max_ref_count = max(ref_ngram.get(ngram, 0) for ref_ngram in reference_ngrams)
+        clipped_count += min(count, max_ref_count)
+    
+    # Calculate precision
+    precision = clipped_count / sentence_count if sentence_count > 0 else 0
+    
+    # Calculate brevity penalty
+    brevity_penalty = 1.0 if len(sentence) > closest_ref_count else np.exp(1 - closest_ref_count / len(sentence))
+    
+    # Calculate BLEU score
     bleu_score = brevity_penalty * precision
+    
     return bleu_score
