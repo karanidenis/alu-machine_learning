@@ -3,9 +3,8 @@
 """This module has a function that
 calculates the cumulative n-gram BLEU score"""
 uni_bleu = __import__('0-uni_bleu').uni_bleu
-# ngram_bleu = __import__('1-ngram_bleu').ngram_bleu
 import numpy as np
-from collections import Counter
+# from collections import Counter
 
 
 # def ngram_bleu(references, sentence, n):
@@ -22,14 +21,14 @@ from collections import Counter
 
 #     # Generate n-grams for the references
 #     reference_ngrams = [Counter(tuple(ref[i:i+n]) for i in
-#                                 range(len(ref) - n + 1)) for ref in references]
+#                          range(len(ref) - n + 1)) for ref in references]
 
 #     # Count the total number of n-grams in the sentence
 #     sentence_count = sum(sentence_ngrams.values())
 
 #     # Find the reference length that is closest to the sentence length
 #     ref_lengths = [len(ref) for ref in references]
-#     closest_ref_count = min(ref_lengths, key=lambda ref_len: (abs(ref_len - len(sentence)), ref_len))
+#  closest_ref_count = min(ref_lengths, key=lambda ref_len: (abs(ref_len - len(sentence)), ref_len))
 
 #     # Count the clipped n-grams
 #     clipped_count = 0
@@ -65,10 +64,10 @@ from collections import Counter
 #     if all(p == 0 for p in precisions):
 #         geometric_mean = 0
 #     else:
-#         geometric_mean = np.exp(sum(np.log(p) for p in precisions if p > 0) / n)
-    
+#   geometric_mean = np.exp(sum(np.log(p) for p in precisions if p > 0) / n)
+
 #     # Calculate brevity penalty
-#     brevity_penalty = 1.0 if len(sentence) > closest_ref_count else np.exp(1 - closest_ref_count / len(sentence))
+#  brevity_penalty = 1.0 if len(sentence) > closest_ref_count else np.exp(1-closest_ref_count / len(sentence))
 
 #     # Calculate cumulative BLEU score
 #     cumulative_bleu_score = brevity_penalty * geometric_mean
