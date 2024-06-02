@@ -20,14 +20,14 @@ import numpy as np
 
 #     # Generate n-grams for the references
 #     reference_ngrams = [Counter(tuple(ref[i:i+n]) for i in
-#                                 range(len(ref) - n + 1)) for ref in references]
+#                           range(len(ref) - n + 1)) for ref in references]
 
 #     # Count the total number of n-grams in the sentence
 #     sentence_count = sum(sentence_ngrams.values())
 
 #     # Find the reference length that is closest to the sentence length
 #     ref_lengths = [len(ref) for ref in references]
-#     closest_ref_count = min(ref_lengths, key=lambda ref_len: (abs(ref_len - len(sentence)), ref_len))
+#   closest_ref_count = min(ref_lengths, key=lambda ref_len: (abs(ref_len - len(sentence)), ref_len))
 
 #     # Count the clipped n-grams
 #     clipped_count = 0
@@ -41,7 +41,7 @@ import numpy as np
 
 #     # Calculate brevity penalty
 #     if len(sentence) > closest_ref_count:
-#          brevity_penalty = 1.0 
+#          brevity_penalty = 1.0
 #     else:
 #         brevity_penalty = np.exp(1 - closest_ref_count / len(sentence))
 
