@@ -197,19 +197,21 @@ class NST:
             tf.cast(nh * nw * nc, tf.float32)
 
     def total_cost(self, generated_image):
-        """total cost"""
-        if not (isinstance(generated_image, tf.Tensor) or
-                isinstance(generated_image, tf.Variable)) or \
-                generated_image.shape.dims != self.content_image.shape.dims:
-            raise TypeError('generated_image must be a tensor of shape {}'
-                            .format(self.content_image.shape))
-        preprocessed = tf.keras.applications.vgg19.preprocess_input(
-            generated_image * 255)
-        model_outputs = self.model(preprocessed)
-        style_outputs = [style_layer for style_layer in model_outputs[:-1]]
-        content_output = model_outputs[-1]
+        """
+        Calculates the total cost for the generated image
 
-        J_style = self.style_cost(style_outputs)
-        J_content = self.content_cost(content_output)
-        J = (self.alpha * J_content) + (self.beta * J_style)
-        return J, J_content, J_style
+        parameters:
+            generated_image [tf.Tensor of shape (1, nh, nw, 3)]:
+                contains the generated image
+
+        returns:
+            (J, J_content, J_style) [tuple]:
+                J: total cost
+                J_content: content cost
+                J_style: style cost
+        """
+        shape = self.content_image.shape
+        if not isinstance(generated_image, (tf.Tensor, tf.Variable)) or \
+           generated_image.shape != shape:
+            raise TypeError(
+                "generated_image must be a tensor of shape {}".format(shape))
