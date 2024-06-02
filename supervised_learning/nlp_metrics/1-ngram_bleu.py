@@ -27,7 +27,8 @@ import numpy as np
 
 #     # Find the reference length that is closest to the sentence length
 #     ref_lengths = [len(ref) for ref in references]
-#   closest_ref_count = min(ref_lengths, key=lambda ref_len: (abs(ref_len - len(sentence)), ref_len))
+# closest_ref_count = min(ref_lengths, key=lambda ref_len: \
+# (abs(ref_len - len(sentence)), ref_len))
 
 #     # Count the clipped n-grams
 #     clipped_count = 0
