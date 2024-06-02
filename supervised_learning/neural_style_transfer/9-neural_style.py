@@ -231,10 +231,37 @@ class NST:
 
         return (gradients, total_cost, content_cost, style_cost)
 
-
     def generate_image(self, iterations=1000, step=None, lr=0.01,
                        beta1=0.9, beta2=0.99):
-        """generate the neutral style transfered image"""
+        """
+        Generates the neural style transferred image
+
+        parameters:
+            iterations [int]:
+                number of iterations to perform gradient descent over
+            step [int or None]:
+                step at which to print information about training
+                prints:
+                    i: iteration
+                    J_total: total cost for generated image
+                    J_content: content cost
+                    J_style: style cost
+            lr [float]:
+                learning rate for gradient descent
+            beta1 [float]:
+                beta1 parameter for gradient descent
+            beta2 [float[:
+                beta2 parameter for gradient descent
+
+        Gradient descent should be performed using Adam optimization.
+        The generated image should be initialized as the content image.
+        Keep track of the best cost and the image associated with that cost.
+
+        returns:
+            generated_image, cost
+                generated_image: best generated image
+                cost: best cost
+        """
         if type(iterations) is not int:
             raise TypeError("iterations must be an integer")
         if iterations < 0:
