@@ -2,8 +2,8 @@
 
 """This module has a function that
 calculates the cumulative n-gram BLEU score"""
-uni_bleu = __import__('0-uni_bleu').uni_bleu
 import numpy as np
+uni_bleu = __import__('0-uni_bleu').uni_bleu
 # from collections import Counter
 
 
@@ -28,7 +28,8 @@ import numpy as np
 
 #     # Find the reference length that is closest to the sentence length
 #     ref_lengths = [len(ref) for ref in references]
-#  closest_ref_count = min(ref_lengths, key=lambda ref_len: (abs(ref_len - len(sentence)), ref_len))
+#  closest_ref_count = min(ref_lengths, key=lambda ref_len:\
+# (abs(ref_len - len(sentence)), ref_len))
 
 #     # Count the clipped n-grams
 #     clipped_count = 0
@@ -66,8 +67,9 @@ import numpy as np
 #     else:
 #   geometric_mean = np.exp(sum(np.log(p) for p in precisions if p > 0) / n)
 
-#     # Calculate brevity penalty
-#  brevity_penalty = 1.0 if len(sentence) > closest_ref_count else np.exp(1-closest_ref_count / len(sentence))
+#  # Calculate brevity penalty
+#  brevity_penalty = 1.0 if len(sentence) > \
+# closest_ref_count else np.exp(1-closest_ref_count / len(sentence))
 
 #     # Calculate cumulative BLEU score
 #     cumulative_bleu_score = brevity_penalty * geometric_mean
