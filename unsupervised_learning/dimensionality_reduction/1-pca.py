@@ -27,5 +27,5 @@ def pca(X, ndim):
     eigvecs = eigvecs[:, idx]
     W = eigvecs[:, :ndim]
     T = np.matmul(X, W)
-    
+
     return T
