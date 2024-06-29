@@ -21,7 +21,6 @@ def pdf(X, m, S):
     return:
         - P: numpy.ndarray (n,) the PDF values for each data point
     """
-    # kmeans = __import__('1-kmeans').kmeans
     if not isinstance(X, np.ndarray) or len(X.shape) != 2:
         return None
     if not isinstance(m, np.ndarray) or len(m.shape) != 1:
