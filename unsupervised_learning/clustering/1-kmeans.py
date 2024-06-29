@@ -25,20 +25,29 @@ def kmeans(X, k, iterations=1000):
         - clss: numpy.ndarray (n,) containing the index of the
         cluster in C that each data point belongs to
     """
-    clust = np.random.uniform(np.min(X, axis=0),
-                          np.max(X, axis=0), (k, X.shape[1]))
-    clss = np.zeros(X.shape[0])
-    clust_prev = clust.copy()
+    if type(X) is not np.ndarray or type(k) is not int:
+        return (None, None)
+    if len(X.shape) != 2 or k < 0:
+        return (None, None)
+    if type(iterations) is not int or iterations <= 0:
+        return (None, None)
+    n, d = X.shape
+    if k == 0:
+        return (None, None)
+    low = np.amin(X, axis=0)
+    high = np.amax(X, axis=0)
+    C = np.random.uniform(low, high, size=(k, d))
     for i in range(iterations):
-        dist = np.linalg.norm(X[:, None] - clust, axis=-1)
-        clss = np.argmin(dist, axis=-1)
-        for j in range(k):
-            if len(X[clss == j]) == 0:
-                clust[j] = np.random.uniform(np.min(X, axis=0),
-                                             np.max(X, axis=0))
+        clss = np.argmin(np.linalg.norm(X[:, None] - C, axis=-1), axis=-1)
+        new_C = np.copy(C)
+        for c in range(k):
+            if c not in clss:
+                new_C[c] = np.random.uniform(low, high)
             else:
-                clust[j] = np.mean(X[clss == j], axis=0)
-        if (clust == clust_prev).all():
-            return clust, clss
-        clust_prev = clust.copy()
-    return clust, clss
+                new_C[c] = np.mean(X[clss == c], axis=0)
+        if (new_C == C).all():
+            return (C, clss)
+        else:
+            C = new_C
+    clss = np.argmin(np.linalg.norm(X[:, None] - C, axis=-1), axis=-1)
+    return (C, clss)
