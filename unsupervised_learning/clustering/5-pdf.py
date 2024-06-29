@@ -6,7 +6,7 @@ probability density function of a Gaussian distribution
 """
 
 import numpy as np
-kmeans = __import__('1-kmeans').kmeans
+# kmeans = __import__('1-kmeans').kmeans
 
 
 def pdf(X, m, S):
@@ -38,4 +38,4 @@ def pdf(X, m, S):
     X_m_dot = np.dot(X_m, S_inv)
     X_m_dot_X_m = np.sum(X_m_dot * X_m, axis=1)
     P = fac * np.exp(-0.5 * X_m_dot_X_m)
-    return P
+    return np.maximum(P, 1e-300)
