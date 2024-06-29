@@ -30,8 +30,9 @@ def P_init(X, perplexity):
     n, d = X.shape
 
     # Calculate the pairwise Euclidean distances
+    mult = np.matmul(X, -X.T)
     sum_X = np.sum(np.square(X), 1)
-    D = np.add(np.add(-2 * np.dot(X, -X.T), sum_X), sum_X.T)
+    D = np.add(np.add(-2 * mult, sum_X), sum_X.T)
 
     # Initialize the P affinities
     P = np.zeros((n, n))
