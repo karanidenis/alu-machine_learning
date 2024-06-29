@@ -29,6 +29,7 @@ def grads(Y, P):
     dY = np.zeros((n, ndim))
     PQ = P - Q
     for i in range(n):
-        dY[i, :] = np.sum(np.tile(PQ[:, i] * num[:, i],
-                                  (ndim, 1)).T * (Y[i] - Y), 0)
+        dY[i, :] = np.sum(
+            np.tile(PQ[:, i] * num[:, i],
+                                  (ndim, 1)).T * (Y[i, :] - Y), 0)
     return dY, Q
