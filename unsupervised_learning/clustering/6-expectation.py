@@ -6,7 +6,6 @@ expectation step in the EM algorithm for a GMM
 """
 
 import numpy as np
-pdf = __import__('5-pdf').pdf
 
 
 def expectation(X, pi, m, S):
@@ -25,6 +24,7 @@ def expectation(X, pi, m, S):
             probabilities for each data point in each cluster
         -l: log likelihood of the model
     """
+    pdf = __import__('5-pdf').pdf
     if not isinstance(X, np.ndarray) or len(X.shape) != 2:
         return None, None
     if not isinstance(pi, np.ndarray) or len(pi.shape) != 1:
