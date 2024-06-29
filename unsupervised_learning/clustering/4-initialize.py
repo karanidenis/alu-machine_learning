@@ -23,10 +23,10 @@ def initialize(X, k):
         initialized to be equal
         - m: numpy.ndarray (k, d) containing centroid means for each cluster,
         initialized with K-means
-        - S: numpy.ndarray (k, d, d) containing covariance matrices for each cluster,
+        - S: numpy.ndarray (k, d, d) covariance matrices for each cluster,
         initialized as identity matrices
     """
-    n, d = X.shape
+    d = X.shape[1]
     if not isinstance(X, np.ndarray) or len(X.shape) != 2:
         return None, None, None
     if not isinstance(k, int) or k <= 0:
