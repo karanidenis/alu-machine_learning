@@ -22,7 +22,8 @@ def variance(X, C):
     return:
         - var: total intra-cluster variance
     """
-    dist = np.linalg.norm(X[:, None] - C, axis=-1)
-    clss = np.argmin(dist, axis=-1)
-    var = np.sum(np.linalg.norm(X - C[clss], axis=-1) ** 2)
-    return var
+    var = np.sum((X - C[:, np.newaxis])**2, axis=-1)
+    mean = np.sqrt(var)
+    mini = np.min(mean, axis=0)
+    var = np.sum(mini ** 2)
+    return np.sum(var)
