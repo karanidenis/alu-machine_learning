@@ -56,7 +56,8 @@ def viterbi(Observation, Emission, Transition, Initial):
     back = np.zeros((N, T))
     for i in range(1, T):
         F[:, i] = np.max(
-            F[:, i - 1] * Transition.T * Emission[np.newaxis, :, Observation[i]].T, axis=1)
+            F[:, i - 1] * Transition.T * Emission[np.newaxis, :,
+                                                  Observation[i]].T, axis=1)
         back[:, i] = np.argmax(
             F[:, i - 1] * Transition.T, axis=1)
     P = np.max(F[:, -1])
