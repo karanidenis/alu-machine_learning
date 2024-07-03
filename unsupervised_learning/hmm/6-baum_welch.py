@@ -6,8 +6,6 @@ for a hidden markov model
 """
 
 import numpy as np
-forward = __import__('3-forward').forward
-backward = __import__('5-backward').backward
 
 
 def baum_welch(Observations, Transition, Emission, Initial, iterations=1000):
@@ -29,6 +27,8 @@ def baum_welch(Observations, Transition, Emission, Initial, iterations=1000):
         - Transition is the updated transition probabilities
         - Emission is the updated emission probabilities
     """
+    forward = __import__('3-forward').forward
+    backward = __import__('5-backward').backward
     if (not isinstance(Observations, np.ndarray) or len(Observations.shape) != 1):
         return None, None
     T = Observations.shape[0]
