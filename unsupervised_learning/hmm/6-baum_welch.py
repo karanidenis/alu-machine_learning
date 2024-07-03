@@ -8,6 +8,34 @@ for a hidden markov model
 import numpy as np
 
 
+def forward(Observation, Emission, Transition, Initial):
+    T = Observation.shape[0]
+    N, M = Emission.shape
+
+    alpha = np.zeros((N, T))
+    alpha[:, 0] = Initial[:, 0] * Emission[:, Observation[0]]
+
+    for t in range(1, T):
+        for j in range(N):
+            alpha[j, t] = np.sum(alpha[:, t - 1] * Transition[:, j] * Emission[j, Observation[t]])
+
+    return alpha
+
+def backward(Observation, Emission, Transition, Initial):
+    T = Observation.shape[0]
+    N, M = Emission.shape
+
+    beta = np.zeros((N, T))
+    beta[:, T - 1] = 1
+
+    for t in range(T - 2, -1, -1):
+        for i in range(N):
+            beta[i, t] = np.sum(Transition[i, :] * Emission[:,
+                                                            Observation[t + 1]] * beta[:, t + 1])
+
+    return beta
+
+
 def baum_welch(Observations, Transition, Emission, Initial, iterations=1000):
     """
     performs the Baum-Welch algorithm
@@ -27,8 +55,6 @@ def baum_welch(Observations, Transition, Emission, Initial, iterations=1000):
         - Transition is the updated transition probabilities
         - Emission is the updated emission probabilities
     """
-    forward = __import__('3-forward').forward
-    backward = __import__('5-backward').backward
     if (not isinstance(Observations, np.ndarray) or len(Observations.shape) != 1):
         return None, None
     T = Observations.shape[0]
@@ -46,8 +72,8 @@ def baum_welch(Observations, Transition, Emission, Initial, iterations=1000):
         return None, None
 
     for _ in range(iterations):
-        _, alpha = forward(Observations, Emission, Transition, Initial)
-        _, beta = backward(Observations, Emission, Transition, Initial)
+        alpha = forward(Observations, Emission, Transition, Initial)
+        beta = backward(Observations, Emission, Transition, Initial)
 
         xi = np.zeros((M, M, T - 1))
         gamma = np.zeros((M, T))
