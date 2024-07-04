@@ -30,20 +30,23 @@ def autoencoder(input_dims, filters, latent_dims):
     encoder_input = keras.Input(shape=input_dims)
     x = encoder_input
     for f in filters:
-        x = keras.layers.Conv2D(f, (3, 3), activation='relu', padding='same')(x)
+        x = keras.layers.Conv2D(f, (3, 3),
+                                activation='relu', padding='same')(x)
         x = keras.layers.MaxPooling2D((2, 2), padding='same')(x)
     encoder = keras.models.Model(encoder_input, x)
 
     # decoder
-    encoded_shape = keras.backend.int_shape(x)[1:]  # Get the shape of the encoded output
+    encoded_shape = keras.backend.int_shape(x)[1:]
     decoder_input = keras.Input(shape=encoded_shape)
     x = decoder_input
     for f in filters[::-1]:
-        x = keras.layers.Conv2D(f, (3, 3), activation='relu', padding='same')(x)
+        x = keras.layers.Conv2D(f, (3, 3),
+                                activation='relu', padding='same')(x)
         x = keras.layers.UpSampling2D((2, 2))(x)
-    x = keras.layers.Conv2D(input_dims[-1], (3, 3), activation='sigmoid', padding='same')(x)
+    x = keras.layers.Conv2D(input_dims[-1], (3, 3),
+                            activation='sigmoid', padding='same')(x)
     # Adjust the final output size
-    x = keras.layers.Cropping2D(((2, 2), (2, 2)))(x)  # Crop to match input dimensions
+    x = keras.layers.Cropping2D(((2, 2), (2, 2)))(x)
     decoder = keras.models.Model(decoder_input, x)
 
     # autoencoder
