@@ -43,15 +43,18 @@ class BayesianOptimization:
             ei[sigma == 0.0] = 0.0
         return self.X_s[np.argmax(ei)], ei
 
+
     def _cdf(self, Z):
         """
-        Computes the cumulative distribution function (CDF) for standard normal distribution
+        Computes cumulative distribution function (CDF)
+        for standard normal distribution
         """
         return 0.5 * (1 + np.erf(Z / np.sqrt(2)))
 
     def _pdf(self, Z):
         """
-        Computes the probability density function (PDF) for standard normal distribution
+        Computes the probability density function (PDF)
+        for standard normal distribution
         """
         return (1 / np.sqrt(2 * np.pi)) * np.exp(-0.5 * Z**2)
 
