@@ -43,7 +43,6 @@ class BayesianOptimization:
             ei[sigma == 0.0] = 0.0
         return self.X_s[np.argmax(ei)], ei
 
-
     def _cdf(self, Z):
         """
         Computes cumulative distribution function (CDF)
