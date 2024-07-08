@@ -34,7 +34,8 @@ class GaussianProcess:
 
     def predict(self, X_s):
         """
-        predicts the mean and standard deviation of points in a Gaussian process
+        predicts mean and standard deviation of points in a
+        Gaussian process
         """
 
         K_inv = np.linalg.inv(self.K)
