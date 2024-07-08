@@ -6,6 +6,7 @@ This script represents a noiseless 1D Gaussian process
 
 import numpy as np
 
+
 class GaussianProcess:
     """
     A class that represents a noiseless 1D Gaussian process
@@ -24,15 +25,16 @@ class GaussianProcess:
 
     def kernel(self, X1, X2):
         """
-        A function that calculates the covariance kernel matrix between two matrices
+        calculates the covariance kernel matrix between two matrices
         """
 
-        sqdist = np.sum(X1**2, 1).reshape(-1, 1) + np.sum(X2**2, 1) - 2 * np.dot(X1, X2.T)
+        sqdist = np.sum(X1**2, 1).reshape(-1, 1) + np.sum(
+            X2**2, 1) - 2 * np.dot(X1, X2.T)
         return self.sigma_f**2 * np.exp(-0.5 / self.l**2 * sqdist)
 
     def predict(self, X_s):
         """
-        A function that predicts the mean and standard deviation of points in a Gaussian process
+        predicts the mean and standard deviation of points in a Gaussian process
         """
 
         K_inv = np.linalg.inv(self.K)
