@@ -41,7 +41,7 @@ class GaussianProcess:
             - whose mean and standard deviation should be calculated
             - s is the number of sample points
         Return mu, sigma
-        - mu: 
+        - mu:
         numpy.ndarray (s,) containing the mean for each point in X_s
         """
 
