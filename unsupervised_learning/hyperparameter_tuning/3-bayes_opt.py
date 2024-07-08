@@ -6,7 +6,7 @@ noiseless 1D Gaussian process
 """
 
 import numpy as np
-GP = __import__('2-gp').GaussianProcess
+# GP = __import__('2-gp').GaussianProcess
 from scipy.stats import norm
 
 
@@ -21,8 +21,10 @@ class BayesianOptimization:
         A function that initializes a Bayesian optimization
         """
 
+        GaussianProcess = __import__('2-gp').GaussianProcess
         self.f = f
-        self.gp = GP(X_init, Y_init, l, sigma_f)
+        # self.gp = GP(X_init, Y_init, l, sigma_f)
+        self.gp = GaussianProcess(X_init, Y_init, l, sigma_f)
         self.X_s = np.linspace(bounds[0], bounds[1], ac_samples).reshape(-1, 1)
         self.xsi = xsi
         self.minimize = minimize
